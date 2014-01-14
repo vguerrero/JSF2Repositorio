@@ -33,4 +33,13 @@ public class HelloBean {
 		}
 		return "";
 	}
+	
+	public String movetoPage2Implicit(){
+		return "page2";
+	}
+	
+	public String redirectPage2(){
+		this.setName("redireccionando en JSF 2");
+		return "page2?faces-redirect=true";
+	}
 }

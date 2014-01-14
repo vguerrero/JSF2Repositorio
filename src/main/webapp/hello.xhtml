@@ -12,5 +12,32 @@
 		<h:inputText value="#{helloBean.name}"></h:inputText>
 		<h:commandButton value="Saludar" action="welcome"></h:commandButton>
 	</h:form>
+	<br></br>
+	<h:form>
+		<p>Noten que la URL no cambia</p>
+		<h:commandButton action="page2" value="Navegacion Implicita 1 Forma"></h:commandButton>
+		<br></br>
+		<h:commandButton action="#{helloBean.movetoPage2Implicit}"
+			value="Navegacion Implicita 2 Forma"></h:commandButton>
+	</h:form>
+	<br></br>
+	<h:form>
+		<p>Noten que la URL SI cambia</p>
+		<h:commandButton action="page2?faces-redirect=true"
+			value="Redireccion 1 Forma"></h:commandButton>
+
+		<h:commandButton action="#{helloBean.redirectPage2}"
+			value="Redireccion 2 Forma"></h:commandButton>
+
+		<h:commandButton action="MensajesdeRecursos?faces-redirect=true"
+			value="Redireccion 2 Forma Mensajes de recursos"></h:commandButton>
+		<br></br>
+		<h:commandButton action="internacionalizacion?faces-redirect=true"
+			value="Internacionalizacion"></h:commandButton>
+	</h:form>
+
+
+
+
 </body>
 </html>
