@@ -1,0 +1,33 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets">
+<head>
+
+<title>Controles JSF 2</title>
+</head>
+<body>
+	<h:form>
+		<h:panelGrid columns="2">
+			<h:outputText value="#{msg['persona.labelName']}"></h:outputText>
+			<h:inputText value="#{formularioBean.persona.primerNombre}"></h:inputText>
+			
+			<h:outputText value="#{msg['persona.labelLastName']}"></h:outputText>
+			<h:inputText value="#{formularioBean.persona.apellido}"></h:inputText>
+			
+			<h:outputText value="#{msg['persona.labelPassword']}"></h:outputText>
+			<h:inputSecret value="#{formularioBean.persona.password}"></h:inputSecret>
+			
+			<h:outputText value="#{msg['persona.comentario']}"></h:outputText>
+			<h:inputTextarea cols="30" rows="5" value="#{formularioBean.persona.comentario}"></h:inputTextarea>
+			
+			<h:inputHidden value="#{formularioBean.persona.respuesta}"></h:inputHidden>
+			
+			<!-- quede por http://www.mkyong.com/jsf2/jsf-2-checkboxes-example/ -->
+			
+			<h:commandButton value="#{msg['persona.buttonSave']}" action="#{formularioBean.GuardarPersona}"></h:commandButton>
+		</h:panelGrid>
+	</h:form>
+</body>
+</html>
