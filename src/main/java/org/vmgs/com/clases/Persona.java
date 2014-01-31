@@ -1,6 +1,7 @@
 package org.vmgs.com.clases;
 
 import java.io.Serializable;
+import java.util.Arrays;
 
 public class Persona implements Serializable {
 
@@ -13,6 +14,8 @@ public class Persona implements Serializable {
 	private String password;
 	private String comentario;//textarea
 	private String respuesta;//hidden
+	private boolean tieneTrabajo;
+	private String[] favoriteTecnologies;
 	/**
 	 * @return the primerNombre
 	 */
@@ -78,6 +81,34 @@ public class Persona implements Serializable {
 	public void setRespuesta(String respuesta) {
 		this.respuesta = respuesta;
 	}
+	
+	
+	/**
+	 * @return the tieneTrabajo
+	 */
+	public boolean isTieneTrabajo() {
+		return tieneTrabajo;
+	}
+	/**
+	 * @param tieneTrabajo the tieneTrabajo to set
+	 */
+	public void setTieneTrabajo(boolean tieneTrabajo) {
+		this.tieneTrabajo = tieneTrabajo;
+	}
+	
+	
+	/**
+	 * @return the favoriteTecnologies
+	 */
+	public String[] getFavoriteTecnologies() {
+		return favoriteTecnologies;
+	}
+	/**
+	 * @param favoriteTecnologies the favoriteTecnologies to set
+	 */
+	public void setFavoriteTecnologies(String[] favoriteTecnologies) {
+		this.favoriteTecnologies = favoriteTecnologies;
+	}
 	/* (non-Javadoc)
 	 * @see java.lang.Object#toString()
 	 */
@@ -85,7 +116,9 @@ public class Persona implements Serializable {
 	public String toString() {
 		return "Persona [primerNombre=" + primerNombre + ", apellido="
 				+ apellido + ", password=" + password + ", comentario="
-				+ comentario + ", respuesta=" + respuesta + "]";
+				+ comentario + ", respuesta=" + respuesta + ", tieneTrabajo="
+				+ tieneTrabajo + ", favoriteTecnologies="
+				+ Arrays.toString(favoriteTecnologies) + "]";
 	}
 	
 	

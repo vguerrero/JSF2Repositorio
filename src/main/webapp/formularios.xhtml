@@ -12,22 +12,31 @@
 		<h:panelGrid columns="2">
 			<h:outputText value="#{msg['persona.labelName']}"></h:outputText>
 			<h:inputText value="#{formularioBean.persona.primerNombre}"></h:inputText>
-			
+
 			<h:outputText value="#{msg['persona.labelLastName']}"></h:outputText>
 			<h:inputText value="#{formularioBean.persona.apellido}"></h:inputText>
-			
+
 			<h:outputText value="#{msg['persona.labelPassword']}"></h:outputText>
 			<h:inputSecret value="#{formularioBean.persona.password}"></h:inputSecret>
-			
+
 			<h:outputText value="#{msg['persona.comentario']}"></h:outputText>
-			<h:inputTextarea cols="30" rows="5" value="#{formularioBean.persona.comentario}"></h:inputTextarea>
-			
-			<h:inputHidden value="#{formularioBean.persona.respuesta}"></h:inputHidden>
-			
-			<!-- quede por http://www.mkyong.com/jsf2/jsf-2-checkboxes-example/ -->
-			
-			<h:commandButton value="#{msg['persona.buttonSave']}" action="#{formularioBean.GuardarPersona}"></h:commandButton>
+			<h:inputTextarea cols="30" rows="5"
+				value="#{formularioBean.persona.comentario}"></h:inputTextarea>
+
+			<h:outputText value="#{msg['persona.tieneTrabajo']}"></h:outputText>
+			<h:selectBooleanCheckbox
+				value="#{formularioBean.persona.tieneTrabajo}"></h:selectBooleanCheckbox>
+
+			<h:outputText value="#{msg['persona.tecnologias']}"></h:outputText>
+			<h:selectManyCheckbox
+				value="#{formularioBean.persona.favoriteTecnologies}">
+				<f:selectItems value="#{formularioBean.mapTecnologies}"></f:selectItems>
+			</h:selectManyCheckbox>
+
+			<h:commandButton value="#{msg['persona.buttonSave']}"
+				action="#{formularioBean.GuardarPersona}"></h:commandButton>
 		</h:panelGrid>
+		<h:inputHidden value="#{formularioBean.persona.respuesta}"></h:inputHidden>
 	</h:form>
 </body>
 </html>
