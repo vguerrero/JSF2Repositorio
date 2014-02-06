@@ -3,15 +3,21 @@
 	xmlns:h="http://java.sun.com/jsf/html"
 	xmlns:f="http://java.sun.com/jsf/core"
 	xmlns:ui="http://java.sun.com/jsf/facelets">
-<head>
+<h:head>
 
 <title>Controles JSF 2</title>
-</head>
-<body>
+</h:head>
+<h:body>
+	<h:outputStylesheet library="css" name="style1.css"> </h:outputStylesheet>
 	<h:form>
+	 <h:messages class="validationError" />
+
 		<h:panelGrid columns="2">
 			<h:outputText value="#{msg['persona.labelName']}"></h:outputText>
-			<h:inputText value="#{formularioBean.persona.primerNombre}"></h:inputText>
+			<h:inputText  id="txtprimerNombre" required="true" value="#{formularioBean.persona.primerNombre}" label="Primer Nombre" >
+				<f:validateLength minimum="3" maximum="15" />
+			</h:inputText>
+			
 
 			<h:outputText value="#{msg['persona.labelLastName']}"></h:outputText>
 			<h:inputText value="#{formularioBean.persona.apellido}"></h:inputText>
@@ -32,11 +38,17 @@
 				value="#{formularioBean.persona.favoriteTecnologies}">
 				<f:selectItems value="#{formularioBean.mapTecnologies}"></f:selectItems>
 			</h:selectManyCheckbox>
+			
+			<h:outputText value="#{msg['persona.comida']}"></h:outputText>
+			<h:selectOneMenu value="#{formularioBean.persona.favoriteFoot}">
+				<f:selectItem itemValue="0" itemLabel="Select one Option" />
+				<f:selectItems value="#{formularioBean.mapFoot}" ></f:selectItems >
+			</h:selectOneMenu>
 
 			<h:commandButton value="#{msg['persona.buttonSave']}"
 				action="#{formularioBean.GuardarPersona}"></h:commandButton>
 		</h:panelGrid>
 		<h:inputHidden value="#{formularioBean.persona.respuesta}"></h:inputHidden>
 	</h:form>
-</body>
+</h:body>
 </html>

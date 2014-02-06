@@ -1,0 +1,40 @@
+body{
+font-family:"Lucida Grande", "Lucida Sans Unicode", Verdana, Arial, Helvetica, sans-serif;
+font-size:14px;
+}
+/*General rules*/
+#form3 input {
+    line-height:18px;
+}
+/*Text, email & tel input fields*/
+input[type=text],
+input[type=password],
+textarea
+ {
+    width:auto;
+    margin-bottom:8px;
+    padding:2px 5px;
+    -webkit-border-radius: 5px;
+    -moz-border-radius: 5px;
+    border-radius: 5px;
+    border:1px solid #CCC;
+}
+
+/*The Submit Button */
+input[type=submit] {
+    margin-top:5px;
+    padding:2px 20px;
+    -webkit-border-radius: 5px;
+    -moz-border-radius: 5px;
+    border-radius: 5px;
+    border:2px solid #06C;
+    background-color:#09F;
+    color:#fff;
+    font-weight:bold;
+	
+}
+.validationError{
+	color:red;
+	font-weight:bold;
+}
+

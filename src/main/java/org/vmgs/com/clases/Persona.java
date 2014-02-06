@@ -16,6 +16,7 @@ public class Persona implements Serializable {
 	private String respuesta;//hidden
 	private boolean tieneTrabajo;
 	private String[] favoriteTecnologies;
+	private String favoriteFoot;
 	/**
 	 * @return the primerNombre
 	 */
@@ -109,6 +110,13 @@ public class Persona implements Serializable {
 	public void setFavoriteTecnologies(String[] favoriteTecnologies) {
 		this.favoriteTecnologies = favoriteTecnologies;
 	}
+	
+	public String getFavoriteFoot(){
+		return this.favoriteFoot;
+	}
+	public void setFavoriteFoot(String favoriteFoot){
+		this.favoriteFoot=favoriteFoot;
+	}
 	/* (non-Javadoc)
 	 * @see java.lang.Object#toString()
 	 */
@@ -118,7 +126,9 @@ public class Persona implements Serializable {
 				+ apellido + ", password=" + password + ", comentario="
 				+ comentario + ", respuesta=" + respuesta + ", tieneTrabajo="
 				+ tieneTrabajo + ", favoriteTecnologies="
-				+ Arrays.toString(favoriteTecnologies) + "]";
+				+ Arrays.toString(favoriteTecnologies) 
+				+", Comida Favorita= " + favoriteFoot 
+				+ "]";
 	}
 	
 	

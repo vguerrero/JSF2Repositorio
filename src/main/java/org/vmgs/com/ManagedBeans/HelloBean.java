@@ -2,10 +2,14 @@ package org.vmgs.com.ManagedBeans;
 
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
+import java.util.Map;
+import javax.faces.context.FacesContext;
+import javax.faces.event.ActionEvent;
+import java.io.Serializable;
 
 @SessionScoped
 @ManagedBean
-public class HelloBean {
+public class HelloBean implements Serializable {
 
 	private String name;
 
@@ -42,4 +46,16 @@ public class HelloBean {
 		this.setName("redireccionando en JSF 2");
 		return "page2?faces-redirect=true";
 	}
+	
+	public void recibirParametro(){
+		FacesContext fc = FacesContext.getCurrentInstance();
+		Map<String,String> params = fc.getExternalContext().getRequestParameterMap();
+		String parametro = params.get("poblacion");
+		System.out.print(parametro);
+	}
+	
+	public void attrListener(ActionEvent event){
+ 		String country = (String)event.getComponent().getAttributes().get("poblacion");
+		System.out.print(country);
+ 	}
 }

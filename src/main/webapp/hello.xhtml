@@ -34,6 +34,17 @@
 		<br></br>
 		<h:commandButton action="internacionalizacion?faces-redirect=true"
 			value="Internacionalizacion"></h:commandButton>
+		<br></br>
+		<p>Pasar un parametro a el managedB</p>
+		<h:commandButton action="#{helloBean.recibirParametro}" value="Enviar Parametro">
+		<f:param name="poblacion" value="Colombia" />
+		</h:commandButton>
+		
+		<br></br>
+		<p>Otra forma Pasar un parametro a el managedB</p>
+		<h:commandButton actionListener="#{helloBean.attrListener}" value="Send Parameter" >
+			<f:attribute  name="poblacion" value="Venezuela" />
+		</h:commandButton>
 	</h:form>
 
 
