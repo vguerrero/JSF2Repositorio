@@ -7,9 +7,11 @@ import java.util.HashMap;
 import java.util.TreeMap;
 import java.util.LinkedHashMap;
 import java.util.Map;
-
+import java.util.List;
+import java.util.ArrayList;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
+import javax.faces.context.FacesContext;
 
 import org.vmgs.com.clases.Persona;
 
@@ -24,10 +26,12 @@ public class FormularioBean implements Serializable {
 	private static Map<String, Integer> MapTecnologies;
 	//combo source
 	private static Map<String, Integer> MapFoot;
+	private List<Persona> personaLista;
 	/*-----------Members  ------------------------*/
 
 	public FormularioBean() {
 		persona = new Persona();
+		this.personaLista = new ArrayList<Persona>();
 		persona.setRespuesta("Mi esposa");
 	}
 
@@ -58,6 +62,7 @@ public class FormularioBean implements Serializable {
 		MapFoot.put("Sopa", 1);
 		MapFoot.put("Ensalada", 2);
 		MapFoot.put("Pescado", 3);
+			
 	}
 
 	/**
@@ -70,11 +75,37 @@ public class FormularioBean implements Serializable {
 	public Map<String, Integer> getMapFoot() {
 		return this.MapFoot;
 	}
+	
+	public List<Persona> getPersonaLista(){
+		return this.personaLista;
+	}
+	
+	public void setPersonaLista(List<Persona> personas){
+		this.personaLista=personas;
+	}
 
 	public String GuardarPersona() {
 		System.out.print(persona.toString());
-
+		this.personaLista.add(persona);
 		persona = new Persona();// limpia el formulario
 		return "";
+	}
+	
+	
+	public String deleteAction(){
+		FacesContext fc = FacesContext.getCurrentInstance();
+		Map<String,String> params = fc.getExternalContext().getRequestParameterMap();
+		String parametro = params.get("personaId");
+		System.out.print(parametro);
+		Persona toDelete;
+		if(parametro != ""){
+			for(Persona p : personaLista){
+				if(p.getPrimerNombre() != null && p.getPrimerNombre().contains(parametro))
+				personaLista.remove(p);
+				System.out.print("Se elimino: "+ p.getPrimerNombre() );
+				break;
+			}
+		}
+		return null;
 	}
 }

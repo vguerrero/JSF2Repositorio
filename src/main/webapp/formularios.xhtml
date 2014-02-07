@@ -9,6 +9,8 @@
 </h:head>
 <h:body>
 	<h:outputStylesheet library="css" name="style1.css"> </h:outputStylesheet>
+	<h:outputStylesheet library="css" name="table-style.css"> </h:outputStylesheet>
+	
 	<h:form>
 	 <h:messages class="validationError" />
 
@@ -49,6 +51,46 @@
 				action="#{formularioBean.GuardarPersona}"></h:commandButton>
 		</h:panelGrid>
 		<h:inputHidden value="#{formularioBean.persona.respuesta}"></h:inputHidden>
+	</h:form>
+	<hr></hr>
+	<h:form>
+	<h:dataTable value="#{formularioBean.personaLista}" styleClass="order-table"
+    			headerClass="order-table-header"
+    			rowClasses="order-table-odd-row,order-table-even-row"
+				var="p" >
+				<h:column>
+    				<!-- column header -->
+    				<f:facet name="header">Primer Nombre</f:facet>
+    				<!-- row record -->
+    				#{p.primerNombre}
+    			</h:column>
+				
+				<h:column>
+    				<!-- column header -->
+    				<f:facet name="header">Apellidos</f:facet>
+    				<!-- row record -->
+    				#{p.apellido}
+    			</h:column>
+				
+				<h:column>
+    				<!-- column header -->
+    				<f:facet name="header">Trabaja</f:facet>
+    				<!-- row record -->
+    				<!--#{p.apellido} -->
+					<h:selectBooleanCheckbox value="#{p.tieneTrabajo}"></h:selectBooleanCheckbox>
+    			</h:column>
+				
+				<h:column>
+					<f:facet name="header">Acciones</f:facet>
+					
+					
+						<h:commandLink value="Delete" action="#{formularioBean.deleteAction}">	
+							<f:param name="personaId" value="#{p.primerNombre}" />					
+						</h:commandLink>
+				
+				</h:column>
+
+	</h:dataTable>
 	</h:form>
 </h:body>
 </html>
