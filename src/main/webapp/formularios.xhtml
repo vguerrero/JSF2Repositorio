@@ -47,8 +47,8 @@
 				<f:selectItems value="#{formularioBean.mapFoot}" ></f:selectItems >
 			</h:selectOneMenu>
 
-			<h:commandButton value="#{msg['persona.buttonSave']}"
-				action="#{formularioBean.GuardarPersona}"></h:commandButton>
+			<h:commandButton value="#{msg['persona.buttonSave']}" action="#{formularioBean.GuardarPersona}">
+			</h:commandButton>
 		</h:panelGrid>
 		<h:inputHidden value="#{formularioBean.persona.respuesta}"></h:inputHidden>
 	</h:form>
@@ -57,37 +57,48 @@
 	<h:dataTable value="#{formularioBean.personaLista}" styleClass="order-table"
     			headerClass="order-table-header"
     			rowClasses="order-table-odd-row,order-table-even-row"
-				var="p" >
+				var="p" rendered="#{not empty formularioBean.personaLista}" >
+				<h:column>
+ 					<!-- display currently selected row number -->
+					<f:facet name="header">No</f:facet>
+					#{formularioBean.personaLista.indexOf(p) + 1}
+ 				</h:column>
+
 				<h:column>
     				<!-- column header -->
     				<f:facet name="header">Primer Nombre</f:facet>
     				<!-- row record -->
-    				#{p.primerNombre}
+    				<h:outputText value="#{p.primerNombre}" rendered="#{not p.editable}" />
+					<!-- edit record -->
+					<h:inputText value="#{p.primerNombre}"  rendered="#{p.editable}" />
     			</h:column>
 				
 				<h:column>
     				<!-- column header -->
     				<f:facet name="header">Apellidos</f:facet>
     				<!-- row record -->
-    				#{p.apellido}
+    				<h:outputText value="#{p.apellido}" rendered="#{not p.editable}" />
+					<!-- edit record -->
+					<h:inputText value="#{p.apellido}"  rendered="#{p.editable}" />
     			</h:column>
 				
 				<h:column>
     				<!-- column header -->
     				<f:facet name="header">Trabaja</f:facet>
     				<!-- row record -->
-    				<!--#{p.apellido} -->
-					<h:selectBooleanCheckbox value="#{p.tieneTrabajo}"></h:selectBooleanCheckbox>
+    				<h:selectBooleanCheckbox value="#{p.tieneTrabajo}" disabled="#{not p.editable}"></h:selectBooleanCheckbox>
     			</h:column>
 				
 				<h:column>
 					<f:facet name="header">Acciones</f:facet>
-					
-					
+						<!--Edit Button -->
+						<h:commandLink value="Editar" action="#{formularioBean.editAction(p)}" rendered="#{not p.editable}" />
+						<h:commandLink value="Guardar Cambios" action="#{formularioBean.GuardarCambios}" rendered="#{p.editable}" />
+						<span class="separator"/>
 						<h:commandLink value="Delete" action="#{formularioBean.deleteAction}">	
 							<f:param name="personaId" value="#{p.primerNombre}" />					
 						</h:commandLink>
-				
+						
 				</h:column>
 
 	</h:dataTable>

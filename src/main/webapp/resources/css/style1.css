@@ -38,3 +38,8 @@ input[type=submit] {
 	font-weight:bold;
 }
 
+.separator{
+    content: " | ";
+    padding: 0 10px;
+}
+

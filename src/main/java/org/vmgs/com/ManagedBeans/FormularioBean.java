@@ -88,7 +88,7 @@ public class FormularioBean implements Serializable {
 		System.out.print(persona.toString());
 		this.personaLista.add(persona);
 		persona = new Persona();// limpia el formulario
-		return "";
+		return "formularios?faces-redirect=true";
 	}
 	
 	
@@ -96,16 +96,33 @@ public class FormularioBean implements Serializable {
 		FacesContext fc = FacesContext.getCurrentInstance();
 		Map<String,String> params = fc.getExternalContext().getRequestParameterMap();
 		String parametro = params.get("personaId");
-		System.out.print(parametro);
+		System.out.print("\n " + parametro);
 		Persona toDelete;
 		if(parametro != ""){
 			for(Persona p : personaLista){
-				if(p.getPrimerNombre() != null && p.getPrimerNombre().contains(parametro))
-				personaLista.remove(p);
-				System.out.print("Se elimino: "+ p.getPrimerNombre() );
-				break;
+				if(p.getPrimerNombre() != null && p.getPrimerNombre().contains(parametro)){
+					personaLista.remove(p);
+					System.out.print("\n Se elimino: "+ p.toString() );
+					break;
+				}
 			}
 		}
 		return null;
+	}
+
+	//marcar el objeto como editable
+	public String editAction(Persona p){
+		p.setEditable(true);
+		return null;
+	}
+	
+	public String GuardarCambios(){
+		//get all existing value but set "editable" to false 
+		for (Persona p : personaLista){
+			p.setEditable(false);
+		}
+		//return to current page
+		return null;
+
 	}
 }

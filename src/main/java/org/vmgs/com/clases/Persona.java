@@ -17,6 +17,8 @@ public class Persona implements Serializable {
 	private boolean tieneTrabajo;
 	private String[] favoriteTecnologies;
 	private String favoriteFoot;
+	
+	private boolean editable;
 	/**
 	 * @return the primerNombre
 	 */
@@ -116,6 +118,14 @@ public class Persona implements Serializable {
 	}
 	public void setFavoriteFoot(String favoriteFoot){
 		this.favoriteFoot=favoriteFoot;
+	}
+	
+	public boolean getEditable(){
+		return this.editable;
+	}
+	
+	public void setEditable(boolean value){
+		this.editable=value;
 	}
 	/* (non-Javadoc)
 	 * @see java.lang.Object#toString()
