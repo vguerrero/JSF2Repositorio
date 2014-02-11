@@ -4,104 +4,108 @@
 	xmlns:f="http://java.sun.com/jsf/core"
 	xmlns:ui="http://java.sun.com/jsf/facelets">
 <h:head>
-
-<title>Controles JSF 2</title>
-</h:head>
-<h:body>
 	<h:outputStylesheet library="css" name="style1.css"> </h:outputStylesheet>
 	<h:outputStylesheet library="css" name="table-style.css"> </h:outputStylesheet>
-	
-	<h:form>
-	 <h:messages class="validationError" />
+	<title>Controles JSF 2</title>
+</h:head>
+<h:body>
 
-		<h:panelGrid columns="2">
-			<h:outputText value="#{msg['persona.labelName']}"></h:outputText>
-			<h:inputText  id="txtprimerNombre" required="true" value="#{formularioBean.persona.primerNombre}" label="Primer Nombre" >
-				<f:validateLength minimum="3" maximum="15" />
-			</h:inputText>
-			
+	<ui:composition template="template/common/commonLayout.xhtml">
+		<ui:define name="content">
+			<h:form>
+			 <h:messages class="validationError" />
 
-			<h:outputText value="#{msg['persona.labelLastName']}"></h:outputText>
-			<h:inputText value="#{formularioBean.persona.apellido}"></h:inputText>
+				<h:panelGrid columns="2">
+					<h:outputText value="#{msg['persona.labelName']}"></h:outputText>
+					<h:inputText  id="txtprimerNombre" required="true" value="#{formularioBean.persona.primerNombre}" label="Primer Nombre" >
+						<f:validateLength minimum="3" maximum="15" />
+					</h:inputText>
+					
 
-			<h:outputText value="#{msg['persona.labelPassword']}"></h:outputText>
-			<h:inputSecret value="#{formularioBean.persona.password}"></h:inputSecret>
+					<h:outputText value="#{msg['persona.labelLastName']}"></h:outputText>
+					<h:inputText value="#{formularioBean.persona.apellido}"></h:inputText>
 
-			<h:outputText value="#{msg['persona.comentario']}"></h:outputText>
-			<h:inputTextarea cols="30" rows="5"
-				value="#{formularioBean.persona.comentario}"></h:inputTextarea>
+					<h:outputText value="#{msg['persona.labelPassword']}"></h:outputText>
+					<h:inputSecret value="#{formularioBean.persona.password}"></h:inputSecret>
 
-			<h:outputText value="#{msg['persona.tieneTrabajo']}"></h:outputText>
-			<h:selectBooleanCheckbox
-				value="#{formularioBean.persona.tieneTrabajo}"></h:selectBooleanCheckbox>
+					<h:outputText value="#{msg['persona.comentario']}"></h:outputText>
+					<h:inputTextarea cols="30" rows="5"
+						value="#{formularioBean.persona.comentario}"></h:inputTextarea>
 
-			<h:outputText value="#{msg['persona.tecnologias']}"></h:outputText>
-			<h:selectManyCheckbox
-				value="#{formularioBean.persona.favoriteTecnologies}">
-				<f:selectItems value="#{formularioBean.mapTecnologies}"></f:selectItems>
-			</h:selectManyCheckbox>
-			
-			<h:outputText value="#{msg['persona.comida']}"></h:outputText>
-			<h:selectOneMenu value="#{formularioBean.persona.favoriteFoot}">
-				<f:selectItem itemValue="0" itemLabel="Select one Option" />
-				<f:selectItems value="#{formularioBean.mapFoot}" ></f:selectItems >
-			</h:selectOneMenu>
+					<h:outputText value="#{msg['persona.tieneTrabajo']}"></h:outputText>
+					<h:selectBooleanCheckbox
+						value="#{formularioBean.persona.tieneTrabajo}"></h:selectBooleanCheckbox>
 
-			<h:commandButton value="#{msg['persona.buttonSave']}" action="#{formularioBean.GuardarPersona}">
-			</h:commandButton>
-		</h:panelGrid>
-		<h:inputHidden value="#{formularioBean.persona.respuesta}"></h:inputHidden>
-	</h:form>
-	<hr></hr>
-	<h:form>
-	<h:dataTable value="#{formularioBean.personaLista}" styleClass="order-table"
-    			headerClass="order-table-header"
-    			rowClasses="order-table-odd-row,order-table-even-row"
-				var="p" rendered="#{not empty formularioBean.personaLista}" >
-				<h:column>
- 					<!-- display currently selected row number -->
-					<f:facet name="header">No</f:facet>
-					#{formularioBean.personaLista.indexOf(p) + 1}
- 				</h:column>
+					<h:outputText value="#{msg['persona.tecnologias']}"></h:outputText>
+					<h:selectManyCheckbox
+						value="#{formularioBean.persona.favoriteTecnologies}">
+						<f:selectItems value="#{formularioBean.mapTecnologies}"></f:selectItems>
+					</h:selectManyCheckbox>
+					
+					<h:outputText value="#{msg['persona.comida']}"></h:outputText>
+					<h:selectOneMenu value="#{formularioBean.persona.favoriteFoot}">
+						<f:selectItem itemValue="0" itemLabel="Select one Option" />
+						<f:selectItems value="#{formularioBean.mapFoot}" ></f:selectItems >
+					</h:selectOneMenu>
 
-				<h:column>
-    				<!-- column header -->
-    				<f:facet name="header">Primer Nombre</f:facet>
-    				<!-- row record -->
-    				<h:outputText value="#{p.primerNombre}" rendered="#{not p.editable}" />
-					<!-- edit record -->
-					<h:inputText value="#{p.primerNombre}"  rendered="#{p.editable}" />
-    			</h:column>
-				
-				<h:column>
-    				<!-- column header -->
-    				<f:facet name="header">Apellidos</f:facet>
-    				<!-- row record -->
-    				<h:outputText value="#{p.apellido}" rendered="#{not p.editable}" />
-					<!-- edit record -->
-					<h:inputText value="#{p.apellido}"  rendered="#{p.editable}" />
-    			</h:column>
-				
-				<h:column>
-    				<!-- column header -->
-    				<f:facet name="header">Trabaja</f:facet>
-    				<!-- row record -->
-    				<h:selectBooleanCheckbox value="#{p.tieneTrabajo}" disabled="#{not p.editable}"></h:selectBooleanCheckbox>
-    			</h:column>
-				
-				<h:column>
-					<f:facet name="header">Acciones</f:facet>
-						<!--Edit Button -->
-						<h:commandLink value="Editar" action="#{formularioBean.editAction(p)}" rendered="#{not p.editable}" />
-						<h:commandLink value="Guardar Cambios" action="#{formularioBean.GuardarCambios}" rendered="#{p.editable}" />
-						<span class="separator"/>
-						<h:commandLink value="Delete" action="#{formularioBean.deleteAction}">	
-							<f:param name="personaId" value="#{p.primerNombre}" />					
-						</h:commandLink>
-						
-				</h:column>
+					<h:commandButton value="#{msg['persona.buttonSave']}" action="#{formularioBean.GuardarPersona}">
+					</h:commandButton>
+				</h:panelGrid>
+				<h:inputHidden value="#{formularioBean.persona.respuesta}"></h:inputHidden>
+			</h:form>
+			<hr></hr>
+			<h:form>
 
-	</h:dataTable>
-	</h:form>
-</h:body>
+		<h:dataTable value="#{formularioBean.personaLista}" styleClass="order-table"
+					headerClass="order-table-header"
+					rowClasses="order-table-odd-row,order-table-even-row"
+					var="p" rendered="#{not empty formularioBean.personaLista}" >
+					<h:column>
+						<!-- display currently selected row number -->
+						<f:facet name="header">No</f:facet>
+						#{formularioBean.personaLista.indexOf(p) + 1}
+					</h:column>
+
+					<h:column>
+						<!-- column header -->
+						<f:facet name="header">Primer Nombre</f:facet>
+						<!-- row record -->
+						<h:outputText value="#{p.primerNombre}" rendered="#{not p.editable}" />
+						<!-- edit record -->
+						<h:inputText value="#{p.primerNombre}"  rendered="#{p.editable}" />
+					</h:column>
+					
+					<h:column>
+						<!-- column header -->
+						<f:facet name="header">Apellidos</f:facet>
+						<!-- row record -->
+						<h:outputText value="#{p.apellido}" rendered="#{not p.editable}" />
+						<!-- edit record -->
+						<h:inputText value="#{p.apellido}"  rendered="#{p.editable}" />
+					</h:column>
+					
+					<h:column>
+						<!-- column header -->
+						<f:facet name="header">Trabaja</f:facet>
+						<!-- row record -->
+						<h:selectBooleanCheckbox value="#{p.tieneTrabajo}" disabled="#{not p.editable}"></h:selectBooleanCheckbox>
+					</h:column>
+					
+					<h:column>
+						<f:facet name="header">Acciones</f:facet>
+							<!--Edit Button -->
+							<h:commandLink value="Editar" action="#{formularioBean.editAction(p)}" rendered="#{not p.editable}" />
+							<h:commandLink value="Guardar Cambios" action="#{formularioBean.GuardarCambios}" rendered="#{p.editable}" />
+							<span class="separator"/>
+							<h:commandLink value="Delete" action="#{formularioBean.deleteAction}">	
+								<f:param name="personaId" value="#{p.primerNombre}" />					
+							</h:commandLink>
+							
+					</h:column>
+
+		</h:dataTable>
+		</h:form>
+		</ui:define>
+	</ui:composition>
+	</h:body>
 </html>
