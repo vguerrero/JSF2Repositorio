@@ -12,7 +12,7 @@ import java.util.ArrayList;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 import javax.faces.context.FacesContext;
-
+import javax.faces.event.ValueChangeEvent;
 import org.vmgs.com.clases.Persona;
 
 @ManagedBean
@@ -124,5 +124,11 @@ public class FormularioBean implements Serializable {
 		//return to current page
 		return null;
 
+	}
+	
+	public void favoriteFootvalueChangeMethod(ValueChangeEvent e){
+		  e.getComponent().processUpdates(FacesContext.getCurrentInstance()); //estas dos lineas para
+		  FacesContext.getCurrentInstance().renderResponse();//que no dispare la validacion de jsf y tambien immediate="true" aya en el control
+		System.out.print("Comida Favorita cambio: " + e.getNewValue().toString());
 	}
 }

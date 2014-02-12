@@ -2,19 +2,24 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
 	xmlns:h="http://java.sun.com/jsf/html"
 	xmlns:f="http://java.sun.com/jsf/core"
-	xmlns:ui="http://java.sun.com/jsf/facelets">
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
 <h:head>
-	<h:outputStylesheet library="css" name="style1.css"> </h:outputStylesheet>
-	<h:outputStylesheet library="css" name="table-style.css"> </h:outputStylesheet>
 	<title>Controles JSF 2</title>
+	
 </h:head>
 <h:body>
-
+	
+	
 	<ui:composition template="template/common/commonLayout.xhtml">
 		<ui:define name="content">
+		
+		<h:outputStylesheet library="css" name="style1.css"> </h:outputStylesheet>
+		<h:outputStylesheet library="css" name="table-style.css"> </h:outputStylesheet>
 			<h:form>
-			 <h:messages class="validationError" />
-
+			
+			  <h:messages class="validationError" />
+			
 				<h:panelGrid columns="2">
 					<h:outputText value="#{msg['persona.labelName']}"></h:outputText>
 					<h:inputText  id="txtprimerNombre" required="true" value="#{formularioBean.persona.primerNombre}" label="Primer Nombre" >
@@ -22,8 +27,8 @@
 					</h:inputText>
 					
 
-					<h:outputText value="#{msg['persona.labelLastName']}"></h:outputText>
-					<h:inputText value="#{formularioBean.persona.apellido}"></h:inputText>
+					<h:outputText  value="#{msg['persona.labelLastName']}"></h:outputText>
+					<h:inputText id="txtapellido" label="Apellido" value="#{formularioBean.persona.apellido}" required="true"></h:inputText>
 
 					<h:outputText value="#{msg['persona.labelPassword']}"></h:outputText>
 					<h:inputSecret value="#{formularioBean.persona.password}"></h:inputSecret>
@@ -43,10 +48,22 @@
 					</h:selectManyCheckbox>
 					
 					<h:outputText value="#{msg['persona.comida']}"></h:outputText>
-					<h:selectOneMenu value="#{formularioBean.persona.favoriteFoot}">
+					<h:selectOneMenu value="#{formularioBean.persona.favoriteFoot}" onchange="submit()"  immediate="true" valueChangeListener="#{formularioBean.favoriteFootvalueChangeMethod}">
 						<f:selectItem itemValue="0" itemLabel="Select one Option" />
 						<f:selectItems value="#{formularioBean.mapFoot}" ></f:selectItems >
 					</h:selectOneMenu>
+					
+					<h:outputText value="#{msg['persona.sueldo']}"></h:outputText>
+					<h:inputText id="txtSueldo" value="#{formularioBean.persona.sueldo}" label="Sueldo" required="true">
+						<!-- display in at least 2 decimal points -->
+						<f:convertNumber minFractionDigits="2" />
+						<f:validateDoubleRange minimum="10000" maximum="12000000" />
+					</h:inputText>
+					
+					<h:outputText value="#{msg['persona.fechaContrato']}"></h:outputText>
+					<h:inputText value="#{formularioBean.persona.fechaContrato}" label="Fecha Contrato" required="true">
+						<f:convertDateTime pattern="d-M-yyyy" />
+					</h:inputText>
 
 					<h:commandButton value="#{msg['persona.buttonSave']}" action="#{formularioBean.GuardarPersona}">
 					</h:commandButton>
@@ -55,56 +72,75 @@
 			</h:form>
 			<hr></hr>
 			<h:form>
+				 
+				 
+				<h:dataTable value="#{formularioBean.personaLista}" styleClass="order-table"
+							headerClass="order-table-header"
+							rowClasses="order-table-odd-row,order-table-even-row"
+							var="p" rendered="#{not empty formularioBean.personaLista}" >
+							<h:column>
+								<!-- display currently selected row number -->
+								<f:facet name="header">No</f:facet>
+								#{formularioBean.personaLista.indexOf(p) + 1}
+							</h:column>
 
-		<h:dataTable value="#{formularioBean.personaLista}" styleClass="order-table"
-					headerClass="order-table-header"
-					rowClasses="order-table-odd-row,order-table-even-row"
-					var="p" rendered="#{not empty formularioBean.personaLista}" >
-					<h:column>
-						<!-- display currently selected row number -->
-						<f:facet name="header">No</f:facet>
-						#{formularioBean.personaLista.indexOf(p) + 1}
-					</h:column>
-
-					<h:column>
-						<!-- column header -->
-						<f:facet name="header">Primer Nombre</f:facet>
-						<!-- row record -->
-						<h:outputText value="#{p.primerNombre}" rendered="#{not p.editable}" />
-						<!-- edit record -->
-						<h:inputText value="#{p.primerNombre}"  rendered="#{p.editable}" />
-					</h:column>
-					
-					<h:column>
-						<!-- column header -->
-						<f:facet name="header">Apellidos</f:facet>
-						<!-- row record -->
-						<h:outputText value="#{p.apellido}" rendered="#{not p.editable}" />
-						<!-- edit record -->
-						<h:inputText value="#{p.apellido}"  rendered="#{p.editable}" />
-					</h:column>
-					
-					<h:column>
-						<!-- column header -->
-						<f:facet name="header">Trabaja</f:facet>
-						<!-- row record -->
-						<h:selectBooleanCheckbox value="#{p.tieneTrabajo}" disabled="#{not p.editable}"></h:selectBooleanCheckbox>
-					</h:column>
-					
-					<h:column>
-						<f:facet name="header">Acciones</f:facet>
-							<!--Edit Button -->
-							<h:commandLink value="Editar" action="#{formularioBean.editAction(p)}" rendered="#{not p.editable}" />
-							<h:commandLink value="Guardar Cambios" action="#{formularioBean.GuardarCambios}" rendered="#{p.editable}" />
-							<span class="separator"/>
-							<h:commandLink value="Delete" action="#{formularioBean.deleteAction}">	
-								<f:param name="personaId" value="#{p.primerNombre}" />					
-							</h:commandLink>
+							<h:column>
+								<!-- column header -->
+								<f:facet name="header">Primer Nombre</f:facet>
+								<!-- row record -->
+								<h:outputText  value="#{p.primerNombre}" rendered="#{not p.editable}" />
+								<!-- edit record -->
+								<h:inputText  value="#{p.primerNombre}"  rendered="#{p.editable}" />
+								<!-- <h:message  for="txtdtPrimerNombre"  errorClass="validationError"/> -->
+							</h:column>
 							
-					</h:column>
+							<h:column>
+								<!-- column header -->
+								<f:facet name="header">Apellidos</f:facet>
+								<!-- row record -->
+								<h:outputText value="#{p.apellido}" rendered="#{not p.editable}" />
+								<!-- edit record -->
+								<h:inputText value="#{p.apellido}"  rendered="#{p.editable}" />
+							</h:column>
+							
+							<h:column>
+								<!-- column header -->
+								<f:facet name="header">Trabaja</f:facet>
+								<!-- row record -->
+								<h:selectBooleanCheckbox value="#{p.tieneTrabajo}" disabled="#{not p.editable}"></h:selectBooleanCheckbox>
+							</h:column>
+							
+							<h:column headerClass="order-table-header headerclassspace">
+								<f:facet name="header">Sueldo</f:facet>
+									<h:outputText value="#{p.sueldo}">
+										<f:convertNumber currencySymbol="$" type="currency" />
+									</h:outputText>
+							</h:column>
+							
+							<h:column >
+								<f:facet name="header">F Contrato</f:facet>
+									<h:outputText value="#{p.fechaContrato}">
+										<f:convertDateTime pattern="dd-MM-yyyy" />
+									</h:outputText>
+							</h:column>
+														
+							<h:column>
+									<f:facet name="header">Acciones</f:facet>
+									<!--Edit Button -->
+									<h:commandLink value="Editar" action="#{formularioBean.editAction(p)}" rendered="#{not p.editable}" />
+									<h:commandLink value="Guardar Cambios" action="#{formularioBean.GuardarCambios}" rendered="#{p.editable}" />
+									<span class="separator"/>
+									<h:commandLink value="Delete" action="#{formularioBean.deleteAction}">	
+										<f:param name="personaId" value="#{p.primerNombre}" />					
+									</h:commandLink>
+									
+							</h:column>
+							
+							
 
-		</h:dataTable>
+				</h:dataTable>
 		</h:form>
+		
 		</ui:define>
 	</ui:composition>
 	</h:body>

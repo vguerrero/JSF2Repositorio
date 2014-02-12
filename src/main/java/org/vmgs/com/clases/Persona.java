@@ -2,7 +2,7 @@ package org.vmgs.com.clases;
 
 import java.io.Serializable;
 import java.util.Arrays;
-
+import java.util.Date;
 public class Persona implements Serializable {
 
 	/**
@@ -17,6 +17,8 @@ public class Persona implements Serializable {
 	private boolean tieneTrabajo;
 	private String[] favoriteTecnologies;
 	private String favoriteFoot;
+	private double sueldo;
+	private Date fechaContrato;
 	
 	private boolean editable;
 	/**
@@ -127,6 +129,22 @@ public class Persona implements Serializable {
 	public void setEditable(boolean value){
 		this.editable=value;
 	}
+	
+	public double getSueldo(){
+		return this.sueldo;
+	}
+	
+	public void setSueldo(double value){
+		this.sueldo= value;
+	}
+	
+	public Date getFechaContrato(){
+		return this.fechaContrato; 
+	}
+	
+	public void setFechaContrato(Date value){
+		this.fechaContrato= value;
+	}
 	/* (non-Javadoc)
 	 * @see java.lang.Object#toString()
 	 */
@@ -135,9 +153,11 @@ public class Persona implements Serializable {
 		return "Persona [primerNombre=" + primerNombre + ", apellido="
 				+ apellido + ", password=" + password + ", comentario="
 				+ comentario + ", respuesta=" + respuesta + ", tieneTrabajo="
-				+ tieneTrabajo + ", favoriteTecnologies="
-				+ Arrays.toString(favoriteTecnologies) 
+				+ tieneTrabajo + ", favoriteTecnologies="+" ["
+				+ Arrays.toString(favoriteTecnologies) + "] "
 				+", Comida Favorita= " + favoriteFoot 
+				+", Sueldo= "+ sueldo
+				+", FechaContrato= " + fechaContrato.toString()
 				+ "]";
 	}
 	
