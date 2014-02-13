@@ -56,7 +56,16 @@
 			<groupId>org.primefaces</groupId>  
 			<artifactId>primefaces</artifactId>  
 			<version>4.0</version>  
-		</dependency>  
+		</dependency> 
+		
+		<!-- todos los temas en 1 jar -->
+		<dependency>
+			<groupId>org.primefaces.extensions</groupId>
+			<artifactId>all-themes</artifactId>
+			<version>1.0.7</version>
+		</dependency>
+            
+		
 	</dependencies>
 
 	<build>

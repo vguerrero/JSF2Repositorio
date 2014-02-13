@@ -14,6 +14,7 @@ import javax.faces.bean.SessionScoped;
 import javax.faces.context.FacesContext;
 import javax.faces.event.ValueChangeEvent;
 import org.vmgs.com.clases.Persona;
+import javax.faces.event.ActionEvent;
 
 @ManagedBean
 @SessionScoped
@@ -27,6 +28,8 @@ public class FormularioBean implements Serializable {
 	//combo source
 	private static Map<String, Integer> MapFoot;
 	private List<Persona> personaLista;
+	private String currentTheme ;
+	private static Map<String,String> themes;
 	/*-----------Members  ------------------------*/
 
 	public FormularioBean() {
@@ -49,6 +52,14 @@ public class FormularioBean implements Serializable {
 	public void setPersona(Persona persona) {
 		this.persona = persona;
 	}
+	
+	public String getCurrentTheme(){
+		return (this.currentTheme == null || this.currentTheme.equals("")) ? "aristo" : this.currentTheme;
+	}
+	
+	public void setCurrentTheme(String value){
+		this.currentTheme= value;
+	}
 
 	static {
 		MapTecnologies = new HashMap<String, Integer>();// label, value
@@ -62,6 +73,39 @@ public class FormularioBean implements Serializable {
 		MapFoot.put("Sopa", 1);
 		MapFoot.put("Ensalada", 2);
 		MapFoot.put("Pescado", 3);
+		 
+		themes = new TreeMap<String,String>();
+		themes.put("Aristo", "aristo");  
+        themes.put("Black-Tie", "black-tie");  
+        themes.put("Blitzer", "blitzer");  
+        themes.put("Bluesky", "bluesky");  
+        themes.put("Casablanca", "casablanca");  
+        themes.put("Cupertino", "cupertino");  
+        themes.put("Dark-Hive", "dark-hive");  
+        themes.put("Dot-Luv", "dot-luv");  
+        themes.put("Eggplant", "eggplant");  
+        themes.put("Excite-Bike", "excite-bike");  
+        themes.put("Flick", "flick");  
+        themes.put("Glass-X", "glass-x");  
+        themes.put("Hot-Sneaks", "hot-sneaks");  
+        themes.put("Humanity", "humanity");  
+        themes.put("Le-Frog", "le-frog");  
+        themes.put("Midnight", "midnight");  
+        themes.put("Mint-Choc", "mint-choc");  
+        themes.put("Overcast", "overcast");  
+        themes.put("Pepper-Grinder", "pepper-grinder");  
+        themes.put("Redmond", "redmond");  
+        themes.put("Rocket", "rocket");  
+        themes.put("Sam", "sam");  
+        themes.put("Smoothness", "smoothness");  
+        themes.put("South-Street", "south-street");  
+        themes.put("Start", "start");  
+        themes.put("Sunny", "sunny");  
+        themes.put("Swanky-Purse", "swanky-purse");  
+        themes.put("Trontastic", "trontastic");  
+        themes.put("UI-Darkness", "ui-darkness");  
+        themes.put("UI-Lightness", "ui-lightness");  
+        themes.put("Vader", "vader");  
 			
 	}
 
@@ -76,6 +120,10 @@ public class FormularioBean implements Serializable {
 		return this.MapFoot;
 	}
 	
+	public Map<String,String> getThemes(){
+		return this.themes;
+	}
+	
 	public List<Persona> getPersonaLista(){
 		return this.personaLista;
 	}
@@ -85,12 +133,23 @@ public class FormularioBean implements Serializable {
 	}
 
 	public String GuardarPersona() {
-		System.out.print(persona.toString());
+		System.out.print(persona.getPrimerNombre());
 		this.personaLista.add(persona);
 		persona = new Persona();// limpia el formulario
 		return "formularios?faces-redirect=true";
 	}
 	
+	public String GuardarPersonaFromPrime() {
+		System.out.print(persona.getPrimerNombre());
+		this.personaLista.add(persona);
+		persona = new Persona();// limpia el formulario
+		return "primeForm?faces-redirect=true";
+		
+	}
+	
+	public void testButtonActionListener(ActionEvent event) {
+        System.out.println("testButtonActionListener invoked");
+    }
 	
 	public String deleteAction(){
 		FacesContext fc = FacesContext.getCurrentInstance();
@@ -108,6 +167,7 @@ public class FormularioBean implements Serializable {
 			}
 		}
 		return null;
+		
 	}
 
 	//marcar el objeto como editable

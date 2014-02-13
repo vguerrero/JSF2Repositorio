@@ -20,6 +20,7 @@ public class Persona implements Serializable {
 	private double sueldo;
 	private Date fechaContrato;
 	
+	
 	private boolean editable;
 	/**
 	 * @return the primerNombre

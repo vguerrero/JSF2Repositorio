@@ -1,0 +1,86 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
+<h:head>
+	<title>Controles Prim</title>
+	
+</h:head>
+
+<h:body>
+	
+	<ui:composition template="template/common/commonLayout.xhtml">
+		<ui:define name="content">
+		<h:form>
+			<p:panel id="panel" header="New Person" style="margin-left:10%; width:70%;">  
+				<p:messages id="messages" />  
+				 <p:panelGrid columns="3"  >  
+				 
+					<h:outputLabel for="firstname" value="#{msg['persona.labelName']}" />  
+					<p:inputText id="firstname"   
+						value="#{formularioBean.persona.primerNombre}" label="Primer Nombre" required="true" >  
+						<f:validateLength minimum="3" maximum="15" />
+					</p:inputText>  
+					<p:message for="firstname" />  
+					 
+					<h:outputLabel for="surname" value="#{msg['persona.labelLastName']}" />  
+					<p:inputText id="surname" value="#{formularioBean.persona.apellido}" required="true" label="Apellido"/>  
+					<p:message for="surname" />  
+					
+					<h:outputLabel for="comentarios" value="#{msg['persona.comentario']}"  />
+					<p:inputTextarea id="comment" value="#{formularioBean.persona.comentario}" rows="5" cols="40" counter="counter" maxlength="100" counterTemplate="{0} characters remaining." autoResize="false"/>  
+					<h:outputText id="counter" />  
+					
+					<h:outputText value="#{msg['persona.tieneTrabajo']}"></h:outputText>
+					<p:selectBooleanCheckbox id="tieneTrabajo" value="#{formularioBean.persona.tieneTrabajo}" /> 
+					<p:message for="tieneTrabajo" />  
+					
+					<h:outputText value="#{msg['persona.comida']}"></h:outputText>
+					<p:selectOneMenu id="comidaFavorita" value="#{formularioBean.persona.favoriteFoot}" >
+						<f:selectItem itemValue="0" itemLabel="Select one Option" />
+						<f:selectItems value="#{formularioBean.mapFoot}" ></f:selectItems >
+					</p:selectOneMenu>
+					<p:message for="comidaFavorita" />  
+					
+					<h:outputText value="#{msg['persona.sueldo']}"></h:outputText>
+					<p:inputText id="txtSueldo" value="#{formularioBean.persona.sueldo}" label="Sueldo" required="true">
+						<!-- display in at least 2 decimal points -->
+						<f:convertNumber minFractionDigits="2" />
+						<f:validateDoubleRange minimum="10000" maximum="12000000" />
+					</p:inputText>
+					<p:message for="txtSueldo" />  
+																 
+				 </p:panelGrid>  
+				 
+				 <p:commandButton style="margin-top:1%;" id="saveBtn" ajax="true" value="#{msg['persona.buttonSave']}" update="panel" action="#{formularioBean.GuardarPersonaFromPrime}"/>
+				 
+				</p:panel>
+			</h:form>
+			<p:separator id="separator"/>  
+			<h:form>
+			 <p:dataTable var="p" value="#{formularioBean.personaLista}" style="margin-left:10%; width:70%;" >  
+				<p:column headerText="Primer Nombre">  
+					<h:outputText value="#{p.primerNombre}" />  
+				</p:column>  
+		  
+				<p:column headerText="Apellido">  
+					<h:outputText value="#{p.apellido}" />  
+				</p:column>  
+		  
+				<p:column headerText="Trabaja">  
+					<p:selectBooleanCheckbox id="tieneTrabajo" value="#{p.tieneTrabajo}" disabled="#{not p.editable}" /> 
+				</p:column>  
+		  
+				<p:column headerText="Sueldo">  
+					<h:outputText value="#{p.sueldo}">
+						<f:convertNumber currencySymbol="$" type="currency" />
+					</h:outputText>  
+				</p:column>  
+			</p:dataTable>  
+			</h:form>
+		</ui:define>
+	</ui:composition>
+	</h:body>
+</html>

@@ -33,7 +33,7 @@ public class LoginBean implements Serializable{
             HttpSession session = Util.getSession();
             session.setAttribute("currentUser", account);
  
-            return "formularios";
+            return "primeForm?faces-redirect=true";//"formularios?faces-redirect=true";
         } else {
  
             FacesContext.getCurrentInstance().addMessage(
@@ -48,11 +48,18 @@ public class LoginBean implements Serializable{
             return "login";
         }
     }
- 
+	public String getCurrentUserName(){
+		HttpSession session = Util.getSession();
+		Account theAccount = (Account)session.getAttribute("currentUser"); 
+		if(theAccount != null){
+			return theAccount.getUsername();
+		}
+		return "empty";
+	}
     public String logout() {
 	  System.out.print("\n " + this.account.getUsername());
       HttpSession session = Util.getSession();
       session.invalidate();
-      return "login";
+      return "login?faces-redirect=true";
    }
 }

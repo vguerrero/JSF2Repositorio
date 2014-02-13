@@ -4,14 +4,25 @@
 <html xmlns="http://www.w3.org/1999/xhtml"   
       xmlns:ui="http://java.sun.com/jsf/facelets"
 	  xmlns:h="http://java.sun.com/jsf/html"
-      xmlns:p="http://primefaces.org/ui">
+      xmlns:p="http://primefaces.org/ui"
+	  xmlns:f="http://java.sun.com/jsf/core">
     <body>
 	    <ui:composition>
 	
-			<h1>This is default header</h1>
-			<br></br>
-			<h:form >  
-			<p:commandButton style="float:right;" action="#{loginBean.logout}" value="Logout"  ajax="false"></p:commandButton>	
+			<h2>This is default header</h2>
+			
+			<h:form  >  
+				<p:themeSwitcher style="width:165px" id="defaultSwitcher">  
+					<f:selectItem itemLabel="Choose Theme" itemValue="" />  
+					<f:selectItems value="#{formularioBean.themes}" />  
+				</p:themeSwitcher>  
+				<div style="float:right;">
+					<span>Usuario: <h:outputLabel value="#{loginBean.currentUserName}" /> </span>
+					<p:commandLink id="ajax"  action="#{loginBean.logout}" style="margin-left:20px;">  
+						<h:outputText value="LogOut" />  
+					</p:commandLink>
+					
+				</div>						 
 			</h:form >  
 	    </ui:composition>
     </body>

@@ -1,7 +1,8 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
 	xmlns:h="http://java.sun.com/jsf/html"
-	xmlns:p="http://primefaces.org/ui">
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:pt="http://xmlns.jcp.org/jsf/passthrough">
 	<h:head>
         <title>login</title>
     </h:head>
@@ -11,19 +12,19 @@
             <p:growl id="msg" showDetail="true" life="3000" />
             <p:panel header="Login" style="width: 360px;">
  
-                <h:panelGrid id="loginPanel" columns="2">
+                <h:panelGrid id="loginPanel" columns="1">
  
-                    <h:outputText value="Username" />
+                    
  
-                    <p:inputText id="username" value="#{loginBean.account.username}" ></p:inputText>
+                    <p:inputText id="username" value="#{loginBean.account.username}" pt:placeholder="Username" ></p:inputText>
  
                     <p:spacer></p:spacer>
  
                     <p:message for="username" ></p:message>
  
-                    <h:outputText value="Password" />
+                    
  
-                    <p:password id="password" value="#{loginBean.account.password}"  feedback="false"></p:password>
+                    <p:password id="password" value="#{loginBean.account.password}"  pt:placeholder="Password" feedback="false"></p:password>
  
                     <p:spacer></p:spacer>
  
