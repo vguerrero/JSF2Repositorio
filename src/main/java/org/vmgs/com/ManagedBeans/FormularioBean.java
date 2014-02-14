@@ -15,6 +15,9 @@ import javax.faces.context.FacesContext;
 import javax.faces.event.ValueChangeEvent;
 import org.vmgs.com.clases.Persona;
 import javax.faces.event.ActionEvent;
+import javax.faces.context.FacesContext;  
+import org.primefaces.event.RowEditEvent;  
+import javax.faces.application.FacesMessage;
 
 @ManagedBean
 @SessionScoped
@@ -36,6 +39,7 @@ public class FormularioBean implements Serializable {
 		persona = new Persona();
 		this.personaLista = new ArrayList<Persona>();
 		persona.setRespuesta("Mi esposa");
+		this.PoblarPersonasLista();
 	}
 
 	/**
@@ -45,10 +49,7 @@ public class FormularioBean implements Serializable {
 		return persona;
 	}
 
-	/**
-	 * @param persona
-	 *            the persona to set
-	 */
+
 	public void setPersona(Persona persona) {
 		this.persona = persona;
 	}
@@ -106,7 +107,17 @@ public class FormularioBean implements Serializable {
         themes.put("UI-Darkness", "ui-darkness");  
         themes.put("UI-Lightness", "ui-lightness");  
         themes.put("Vader", "vader");  
-			
+		
+		
+	}
+	
+	public void PoblarPersonasLista(){
+		for(int i =0; i<= 50 ;i++){
+			String r=Integer.toString(i);
+			double s = (double) 1500000;
+			Persona p= new Persona("primerNombre" + r , "apellido" + r, true, s);
+			personaLista.add(p);
+		}
 	}
 
 	/**
@@ -191,4 +202,22 @@ public class FormularioBean implements Serializable {
 		  FacesContext.getCurrentInstance().renderResponse();//que no dispare la validacion de jsf y tambien immediate="true" aya en el control
 		System.out.print("Comida Favorita cambio: " + e.getNewValue().toString());
 	}
+
+	public void onEdit(RowEditEvent event) {  
+        //FacesMessage msg = new FacesMessage("Car Edited", ((Persona) event.getObject()).getModel()); 
+		Persona p = (Persona) event.getObject();
+		System.out.print(p.getPrimerNombre());
+		FacesMessage msg = new FacesMessage( FacesMessage.SEVERITY_WARN,
+                    "onEdit!",
+                    "Se ha editado el señor(a): " + p.getPrimerNombre()	);
+        FacesContext.getCurrentInstance().addMessage(null, msg);  
+    }  
+      
+    public void onCancel(RowEditEvent event) {  
+        //FacesMessage msg = new FacesMessage("Edit Cancelled", ((Persona) event.getObject()).getModel());  
+		FacesMessage msg = new FacesMessage( FacesMessage.SEVERITY_WARN,
+                    "onCancel!",
+                    "Please Try Again!"	); 
+        FacesContext.getCurrentInstance().addMessage(null, msg);  
+    }  
 }

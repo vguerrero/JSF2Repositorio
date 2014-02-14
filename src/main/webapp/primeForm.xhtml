@@ -13,8 +13,8 @@
 	
 	<ui:composition template="template/common/commonLayout.xhtml">
 		<ui:define name="content">
-		<h:form>
-			<p:panel id="panel" header="New Person" style="margin-left:10%; width:70%;">  
+		<h:form >
+			<p:panel id="panel" header="New Person" style="margin-left:10%; width:70%;" toggleable="true" toggleSpeed="500" closeSpeed="500" widgetVar="panel">  
 				<p:messages id="messages" />  
 				 <p:panelGrid columns="3"  >  
 				 
@@ -54,31 +54,87 @@
 																 
 				 </p:panelGrid>  
 				 
-				 <p:commandButton style="margin-top:1%;" id="saveBtn" ajax="true" value="#{msg['persona.buttonSave']}" update="panel" action="#{formularioBean.GuardarPersonaFromPrime}"/>
-				 
+				 <p:commandButton style="margin-top:1%;" id="saveBtn" ajax="true" value="#{msg['persona.buttonSave']}" update="panel" action="#{formularioBean.GuardarPersonaFromPrime}"
+				 icon="ui-icon-check" />
+				 <!--si le quitas update="panel" al boton funciona ok
+				 <p:blockUI block="panel" trigger="saveBtn" > 
+					 LOADING<br />  
+					<p:graphicImage value="resources/images/ajax-loader.gif"/> 
+				</p:blockUI> -->
 				</p:panel>
 			</h:form>
 			<p:separator id="separator"/>  
-			<h:form>
-			 <p:dataTable var="p" value="#{formularioBean.personaLista}" style="margin-left:10%; width:70%;" >  
-				<p:column headerText="Primer Nombre">  
-					<h:outputText value="#{p.primerNombre}" />  
+			<h:form id="form">
+			  <p:growl id="messages" showDetail="true"/>
+			 <p:dataTable id="datatable" editable="true" var="p" value="#{formularioBean.personaLista}" style="margin-left:10%; width:70%;" sortMode="multiple" rows="10" paginator="true" >  
+				<f:facet name="header">
+					<span>Listado</span>
+				</f:facet>
+				
+				 <p:ajax event="rowEdit" listener="#{formularioBean.onEdit}" update=":form:messages" />  
+				<p:ajax event="rowEditCancel" listener="#{formularioBean.onCancel}" update=":form:messages" />  
+				
+				<p:column headerText="Primer Nombre" sortBy="primerNombre">  
+								
+					<p:cellEditor>  
+						<f:facet name="output">  
+							<h:outputText value="#{p.primerNombre}" />  
+						</f:facet>  
+						<f:facet name="input">  
+							<p:inputText value="#{p.primerNombre}" style="width:100%"/>  
+						</f:facet>  
+					</p:cellEditor>  
 				</p:column>  
 		  
-				<p:column headerText="Apellido">  
-					<h:outputText value="#{p.apellido}" />  
+				<p:column headerText="Apellido" sortBy="apellido">  
+										
+					<p:cellEditor>  
+						<f:facet name="output">  
+							<h:outputText value="#{p.apellido}" />  
+						</f:facet>  
+						<f:facet name="input">  
+							<p:inputText value="#{p.apellido}" style="width:100%"/>  
+						</f:facet>  
+					</p:cellEditor> 
 				</p:column>  
 		  
 				<p:column headerText="Trabaja">  
-					<p:selectBooleanCheckbox id="tieneTrabajo" value="#{p.tieneTrabajo}" disabled="#{not p.editable}" /> 
+					
+					<p:cellEditor>  
+						<f:facet name="output">  
+							<p:selectBooleanCheckbox id="tieneTrabajo" value="#{p.tieneTrabajo}" disabled="true" /> 
+						</f:facet>  
+						<f:facet name="input">  
+							<p:selectBooleanCheckbox id="tieneTrabajoEdit" value="#{p.tieneTrabajo}" disabled="false" /> 
+						</f:facet>  
+					</p:cellEditor> 
 				</p:column>  
 		  
 				<p:column headerText="Sueldo">  
-					<h:outputText value="#{p.sueldo}">
-						<f:convertNumber currencySymbol="$" type="currency" />
-					</h:outputText>  
+								
+					<p:cellEditor>  
+						<f:facet name="output">  
+							<h:outputText value="#{p.sueldo}">
+								<f:convertNumber currencySymbol="$" type="currency" />
+							</h:outputText> 
+						</f:facet>  
+						<f:facet name="input">  
+								<p:inputText value="#{p.sueldo}" style="width:100%">
+									<f:convertNumber currencySymbol="$" type="currency" />								
+								</p:inputText>
+						</f:facet>  
+					</p:cellEditor> 
+				</p:column>  
+				
+				 <p:column style="width:6%">  
+					<p:rowEditor />  
 				</p:column>  
 			</p:dataTable>  
+			
+			<p:blockUI block="datatable" trigger="datatable">  
+				LOADING<br />  
+				<p:graphicImage value="resources/images/ajax-loader.gif"/> 
+			</p:blockUI>  
 			</h:form>
 		</ui:define>
 	</ui:composition>

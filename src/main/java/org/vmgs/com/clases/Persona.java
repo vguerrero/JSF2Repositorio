@@ -22,6 +22,13 @@ public class Persona implements Serializable {
 	
 	
 	private boolean editable;
+	public Persona(){}
+	public Persona(String primerNombre,String apellido, boolean tieneTrabajo,double sueldo  ){
+		this.primerNombre=primerNombre;
+		this.apellido= apellido;
+		this.tieneTrabajo=tieneTrabajo;
+		this.sueldo=sueldo;
+	}
 	/**
 	 * @return the primerNombre
 	 */
