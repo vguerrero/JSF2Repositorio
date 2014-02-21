@@ -22,7 +22,7 @@ public class LenguajeBean implements Serializable {
 
 	static {
 		contries = new LinkedHashMap<String, Object>();
-		contries.put("Español", new Locale("ES"));
+		contries.put("Espanol", new Locale("ES"));
 		contries.put("English", Locale.ENGLISH);
 		
 

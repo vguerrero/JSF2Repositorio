@@ -1,28 +1,61 @@
 package org.vmgs.com.clases;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Table;
+import javax.persistence.Transient;
+
 import java.io.Serializable;
 import java.util.Arrays;
 import java.util.Date;
+
+@Entity
+@Table(name = "Persona")
 public class Persona implements Serializable {
 
 	/**
 	 * 
 	 */
+	 
+	@Id
+	@GeneratedValue(strategy=GenerationType.AUTO)
+	private Long id;
+	
 	private static final long serialVersionUID = 1L;
+	
+	@Column
 	private String primerNombre;
+	@Column
 	private String apellido;
+	@Column
 	private String password;
+	@Column
 	private String comentario;//textarea
+	@Column
 	private String respuesta;//hidden
+	@Column
 	private boolean tieneTrabajo;
+	
+	@Transient
 	private String[] favoriteTecnologies;
+	
+	@Column
 	private String favoriteFoot;
+	@Column
 	private double sueldo;
+	
+	@Column
 	private Date fechaContrato;
 	
-	
+	@Transient
 	private boolean editable;
+	
+	
 	public Persona(){}
+	
 	public Persona(String primerNombre,String apellido, boolean tieneTrabajo,double sueldo  ){
 		this.primerNombre=primerNombre;
 		this.apellido= apellido;
