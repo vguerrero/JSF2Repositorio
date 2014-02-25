@@ -26,6 +26,15 @@ public class Util {
         HttpSession session = (HttpSession) FacesContext.getCurrentInstance().getExternalContext().getSession(false);
         return  (Account)session.getAttribute("currentUser");
       }
+	  
+	  public static String getCurrentUserName(){
+		HttpSession session = (HttpSession) FacesContext.getCurrentInstance().getExternalContext().getSession(false);
+		if(session != null && (Account)session.getAttribute("currentUser") != null){
+			Account c =  (Account)session.getAttribute("currentUser");
+			return c.getUsername();
+		}
+        return "";
+	  }
        
      /* public static String getUserId()
       {

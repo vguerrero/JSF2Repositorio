@@ -127,10 +127,10 @@
 				</p:column>  
 				
 				 <p:column style="width:6%">  
-					<p:rowEditor />  
-					 <p:commandLink ajax="true" action="#{formularioBean.removePersona(p.getId())}" update="@form">
+					<p:rowEditor />  <p:commandLink ajax="true" action="#{formularioBean.removePersona(p.getId())}" update="@form">
 						<span title="Remove" class="ui-icon ui-icon-trash"/>
 					</p:commandLink>
+					
 				</p:column>  
 			</p:dataTable>  
 			

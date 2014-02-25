@@ -24,6 +24,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import javax.faces.event.ComponentSystemEvent;
 import javax.annotation.PostConstruct;
+import org.vmgs.com.clases.Util;
 
 @ManagedBean
 @Component("formularioBean")
@@ -164,6 +165,7 @@ public class FormularioBean {
 	//guarda con el form de prime
 	public String GuardarPersonaFromPrime() {
 		if(personaDao != null){
+			persona.setSystemUserName(Util.getCurrentUserName());
 			personaDao.save(persona);
 			this.setPersonaLista(personaDao.buscarPersonas());
 			// limpia el formulario

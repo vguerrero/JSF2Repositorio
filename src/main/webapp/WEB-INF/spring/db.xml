@@ -15,14 +15,14 @@
 
 	
 		<!-- Values are defined in db.properties -->
-		<bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource" destroy-method="close">
+		<!--<bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource" destroy-method="close">
 			<property name="driverClassName" value="${db.driver}" />
 			<property name="url" value="${db.url}" />
 			<property name="username" value="${db.username}" />
 			<property name="password" value="${db.password}" />
-		</bean>	
+		</bean>	-->
 	
-	<!-- data source with c3p0 
+	<!-- data source with c3p0 -->
     <bean id="dataSource" class = "com.mchange.v2.c3p0.ComboPooledDataSource" destroy-method="close"
         p:driverClass="${db.driver}"
         p:jdbcUrl="${db.url}"
@@ -32,7 +32,7 @@
 		p:idleConnectionTestPeriod="60"
 		p:maxPoolSize="100"
 		p:maxStatements="50"
-		p:minPoolSize="10" />-->
+		p:minPoolSize="10" />
 		
 		
 	<!-- Declare a JPA entityManagerFactory-->

@@ -45,8 +45,12 @@ public class Persona implements Serializable {
 	
 	@Column
 	private String favoriteFoot="";
-	@Column
+	
+	@Column 
 	private double sueldo=0;
+	
+	@Column (nullable=false, length=20)
+	private String systemUserName;
 	
 	//@Column
 //	private Date fechaContrato="";
@@ -174,6 +178,13 @@ public class Persona implements Serializable {
 		this.sueldo= value;
 	}
 	
+	public String getSystemUserName(){
+		return this.systemUserName;
+	}
+	
+	public void setSystemUserName(String value){
+		this.systemUserName= value;
+	}
 	/*public Date getFechaContrato(){
 		return this.fechaContrato; 
 	}*/
