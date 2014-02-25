@@ -12,6 +12,7 @@ import java.io.Serializable;
 import java.util.Arrays;
 import java.util.Date;
 
+
 @Entity
 @Table(name = "Persona")
 public class Persona implements Serializable {
@@ -27,40 +28,34 @@ public class Persona implements Serializable {
 	private static final long serialVersionUID = 1L;
 	
 	@Column
-	private String primerNombre;
+	private String primerNombre="";
 	@Column
-	private String apellido;
+	private String apellido="";
 	@Column
-	private String password;
+	private String password = "";
 	@Column
-	private String comentario;//textarea
+	private String comentario="";//textarea
 	@Column
-	private String respuesta;//hidden
+	private String respuesta="escondida";//hidden
 	@Column
-	private boolean tieneTrabajo;
+	private boolean tieneTrabajo=false;
 	
 	@Transient
-	private String[] favoriteTecnologies;
+	private String[] favoriteTecnologies=new String [] {};
 	
 	@Column
-	private String favoriteFoot;
+	private String favoriteFoot="";
 	@Column
-	private double sueldo;
+	private double sueldo=0;
 	
-	@Column
-	private Date fechaContrato;
+	//@Column
+//	private Date fechaContrato="";
 	
 	@Transient
 	private boolean editable;
 	
-	
-	public Persona(){}
-	
-	public Persona(String primerNombre,String apellido, boolean tieneTrabajo,double sueldo  ){
-		this.primerNombre=primerNombre;
-		this.apellido= apellido;
-		this.tieneTrabajo=tieneTrabajo;
-		this.sueldo=sueldo;
+	public Long getId(){
+		return this.id;
 	}
 	/**
 	 * @return the primerNombre
@@ -179,13 +174,13 @@ public class Persona implements Serializable {
 		this.sueldo= value;
 	}
 	
-	public Date getFechaContrato(){
+	/*public Date getFechaContrato(){
 		return this.fechaContrato; 
-	}
+	}*/
 	
-	public void setFechaContrato(Date value){
+	/*public void setFechaContrato(Date value){
 		this.fechaContrato= value;
-	}
+	}*/
 	/* (non-Javadoc)
 	 * @see java.lang.Object#toString()
 	 */
@@ -194,12 +189,9 @@ public class Persona implements Serializable {
 		return "Persona [primerNombre=" + primerNombre + ", apellido="
 				+ apellido + ", password=" + password + ", comentario="
 				+ comentario + ", respuesta=" + respuesta + ", tieneTrabajo="
-				+ tieneTrabajo + ", favoriteTecnologies="+" ["
-				+ Arrays.toString(favoriteTecnologies) + "] "
-				+", Comida Favorita= " + favoriteFoot 
-				+", Sueldo= "+ sueldo
-				+", FechaContrato= " + fechaContrato.toString()
-				+ "]";
+				+ tieneTrabajo +", Comida Favorita= " + favoriteFoot 
+				+", Sueldo= "+ sueldo;
+				
 	}
 	
 	
