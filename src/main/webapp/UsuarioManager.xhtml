@@ -1,0 +1,65 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
+<h:head>
+	<title>Gestion de Usuarios</title>
+	
+</h:head>
+
+<h:body >
+	
+	<ui:composition template="/WEB-INF/template/common/commonLayout.xhtml">
+		<ui:define name="content">
+		<h:form id="formu">
+		
+			<p:panel id="panel" header="Usuario Manager" style="margin-left:10%; width:70%;" toggleable="true" toggleSpeed="500" closeSpeed="500" widgetVar="panel">  
+				<p:messages id="messages" autoUpdate="true" closable="true" /> 
+				 <p:panelGrid columns="2"  >  
+				 
+					<h:outputLabel for="txtnombre" value="Nombre de Usuario" />  
+					<p:inputText id="txtnombre"   
+						value="#{usuarioBean.usuario.nombre}" label="Nombre de Usuario" required="true" >  
+						<f:validateLength minimum="3" maximum="20" />
+					</p:inputText>  
+					<!--<p:message for="txtnombre" />  -->
+					 
+					<h:outputLabel for="txtpassword" value="Contraseña" />  
+					<p:password id="txtpassword" match="txtpassword2" value="#{usuarioBean.usuario.password}" required="true" label="Contraseña"/>  
+					<!--<p:message for="txtpassword" />  -->
+					
+					 <h:outputLabel for="txtpassword2" value="Confirmar Contraseña: *" />  
+					<p:password id="txtpassword2" value="#{usuarioBean.usuario.password}" label="Confirmacion de Contraseña" required="true"/>  
+					<!--<p:message for="txtpassword2" />	 -->									 
+				 </p:panelGrid>  
+				 
+				  <!--<p:growl id="messages1" showDetail="true"/>-->
+				 <p:commandButton style="margin-top:1%;" id="saveBtn" ajax="true" value="Guardar" update="@form" actionListener="#{usuarioBean.GuardarUsuario}" 
+				 icon="ui-icon-disk" />
+				
+				
+				 
+				</p:panel>
+		
+			<!--<p:separator id="separator"/>  -->
+			<br></br>
+			
+				<p:dataTable id="dtt" var="u" value="#{usuarioBean.usuariosSistema}" style="margin-left:10%;width:50%;text-align:center;"  paginator="true" rows="10" >  
+					<p:column headerText="Nombre de Usuario">  
+						<h:outputText value="#{u.nombre}" />  
+					</p:column>  
+			  
+					<p:column headerText="Fecha de Creacion" >  
+						<h:outputText value="#{u.fechacrea}" />  
+					</p:column>  
+			  
+				
+				</p:dataTable>  
+			
+			</h:form>
+		</ui:define>
+	</ui:composition>
+</h:body>
+</html>

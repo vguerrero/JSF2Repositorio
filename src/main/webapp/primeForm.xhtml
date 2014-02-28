@@ -11,11 +11,11 @@
 
 <h:body>
 	
-	<ui:composition template="template/common/commonLayout.xhtml">
+	<ui:composition template="/WEB-INF/template/common/commonLayout.xhtml">
 		<ui:define name="content">
 		<h:form >
 			<p:panel id="panel" header="New Person" style="margin-left:10%; width:70%;" toggleable="true" toggleSpeed="500" closeSpeed="500" widgetVar="panel">  
-				<p:messages id="messages" />  
+				<p:messages id="messages"  />  
 				 <p:panelGrid columns="3"  >  
 				 
 					<h:outputLabel for="firstname" value="#{msg['persona.labelName']}" />  
@@ -30,7 +30,7 @@
 					<p:message for="surname" />  
 					
 					<h:outputLabel for="comentarios" value="#{msg['persona.comentario']}"  />
-					<p:inputTextarea id="comment" value="#{formularioBean.persona.comentario}" rows="5" cols="40" counter="counter" maxlength="100" counterTemplate="{0} characters remaining." autoResize="false"/>  
+					<p:inputTextarea id="comentarios" value="#{formularioBean.persona.comentario}" rows="5" cols="40" counter="counter" maxlength="100" counterTemplate="{0} characters remaining." autoResize="false"/>  
 					<h:outputText id="counter" />  
 					
 					<h:outputText value="#{msg['persona.tieneTrabajo']}"></h:outputText>
@@ -64,7 +64,7 @@
 				</p:panel>
 			</h:form>
 			<p:separator id="separator"/>  
-			<h:form id="form">
+		<h:form id="form">
 			  <p:growl id="messages" showDetail="true"/>
 			 <p:dataTable id="datatable" editable="true" var="p" value="#{formularioBean.personaLista}" style="margin-left:10%; width:70%;" sortMode="multiple" rows="10" paginator="true" >  
 				<f:facet name="header">
@@ -127,7 +127,8 @@
 				</p:column>  
 				
 				 <p:column style="width:6%">  
-					<p:rowEditor />  <p:commandLink ajax="true" action="#{formularioBean.removePersona(p.getId())}" update="@form">
+					<p:rowEditor />  
+					<p:commandLink ajax="true" action="#{formularioBean.removePersona(p.getId())}" update="@form">
 						<span title="Remove" class="ui-icon ui-icon-trash"/>
 					</p:commandLink>
 					

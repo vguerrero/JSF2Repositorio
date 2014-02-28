@@ -10,7 +10,8 @@ import java.util.Map;
 import java.util.List;
 import java.util.ArrayList;
 import javax.faces.bean.ManagedBean;
-import javax.faces.bean.SessionScoped;
+//import javax.faces.bean.SessionScoped;
+import javax.faces.bean.RequestScoped;
 import javax.faces.context.FacesContext;
 import javax.faces.event.ValueChangeEvent;
 import org.vmgs.com.clases.Persona;
@@ -24,11 +25,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import javax.faces.event.ComponentSystemEvent;
 import javax.annotation.PostConstruct;
-import org.vmgs.com.clases.Util;
+import org.vmgs.com.clases.utilidades.*;
 
 @ManagedBean
 @Component("formularioBean")
-@SessionScoped
+@RequestScoped
 @Transactional//esto deberia ir en el servicio
 public class FormularioBean {
 	@Autowired
@@ -120,6 +121,7 @@ public class FormularioBean {
 	
 	@PostConstruct  //Init Method
 	public void init() {  
+		System.out.println("INIT Work ok");
 		persona = new Persona();
 		this.personaLista = new ArrayList<Persona>();
 		persona.setRespuesta("Mi esposa");

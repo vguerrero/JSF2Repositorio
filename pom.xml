@@ -20,6 +20,14 @@
 		<slf4j.version>1.6.1</slf4j.version>
 	</properties>
 	
+	<repositories>
+		<repository>
+			<id>prime-repo</id>
+			<name>PrimeFaces Maven Repository</name>
+			<url>http://repository.primefaces.org</url>
+			<layout>default</layout>
+		</repository>
+	</repositories>
 	
 	<dependencies>
 		<!-- JSF Dependencies -->
@@ -73,11 +81,13 @@
 		</dependency> 
 		
 		<!-- todos los temas en 1 jar -->
-		<dependency>
-			<groupId>org.primefaces.extensions</groupId>
-			<artifactId>all-themes</artifactId>
-			<version>1.0.7</version>
+		<dependency>  
+			<groupId>org.primefaces.themes</groupId>  
+			<artifactId>all-themes</artifactId>  
+			<version>1.0.10</version>  
 		</dependency>
+		
+		
             
 		<!-- JPA Persistence Dependencies -->
 		<dependency>
@@ -186,6 +196,12 @@
 			<groupId>com.microsoft.sqlserver</groupId>
 			<artifactId>sqljdbc4</artifactId>
 			<version>4.0</version>
+		</dependency>
+            
+		<dependency>
+			<groupId>commons-codec</groupId>
+			<artifactId>commons-codec</artifactId>
+			<version>1.5</version>
 		</dependency>
             
 	</dependencies>

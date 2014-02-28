@@ -14,8 +14,8 @@
 	<ui:composition template="template/common/commonLayout.xhtml">
 		<ui:define name="content">
 		
-		<h:outputStylesheet library="css" name="style1.css"> </h:outputStylesheet>
-		<h:outputStylesheet library="css" name="table-style.css"> </h:outputStylesheet>
+			<h:outputStylesheet library="css" name="style1.css"> </h:outputStylesheet>
+			<h:outputStylesheet library="css" name="table-style.css"> </h:outputStylesheet>
 			<h:form>
 			
 			  <h:messages class="validationError" />
@@ -55,22 +55,22 @@
 					
 					<h:outputText value="#{msg['persona.sueldo']}"></h:outputText>
 					<h:inputText id="txtSueldo" value="#{formularioBean.persona.sueldo}" label="Sueldo" required="true">
-						<!-- display in at least 2 decimal points -->
 						<f:convertNumber minFractionDigits="2" />
 						<f:validateDoubleRange minimum="10000" maximum="12000000" />
 					</h:inputText>
 					
-					<h:outputText value="#{msg['persona.fechaContrato']}"></h:outputText>
+					<!--<h:outputText value="#{msg['persona.fechaContrato']}"></h:outputText>
 					<h:inputText value="#{formularioBean.persona.fechaContrato}" label="Fecha Contrato" required="true">
 						<f:convertDateTime pattern="d-M-yyyy" />
-					</h:inputText>
+					</h:inputText> -->
 
 					<h:commandButton value="#{msg['persona.buttonSave']}" action="#{formularioBean.GuardarPersona}">
 					</h:commandButton>
 				</h:panelGrid>
-				<h:inputHidden value="#{formularioBean.persona.respuesta}"></h:inputHidden>
+				
 			</h:form>
 			<hr></hr>
+			
 			<h:form>
 				 
 				 
@@ -117,12 +117,12 @@
 									</h:outputText>
 							</h:column>
 							
-							<h:column >
+							<!--<h:column >
 								<f:facet name="header">F Contrato</f:facet>
 									<h:outputText value="#{p.fechaContrato}">
 										<f:convertDateTime pattern="dd-MM-yyyy" />
 									</h:outputText>
-							</h:column>
+							</h:column>-->
 														
 							<h:column>
 									<f:facet name="header">Acciones</f:facet>
@@ -140,8 +140,9 @@
 
 				</h:dataTable>
 		</h:form>
+			
 		
 		</ui:define>
 	</ui:composition>
-	</h:body>
+</h:body>
 </html>
