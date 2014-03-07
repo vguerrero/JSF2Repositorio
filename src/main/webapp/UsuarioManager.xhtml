@@ -15,7 +15,7 @@
 		<ui:define name="content">
 		<h:form id="formu">
 		
-			<p:panel id="panel" header="Usuario Manager" style="margin-left:10%; width:70%;" toggleable="true" toggleSpeed="500" closeSpeed="500" widgetVar="panel">  
+			<p:panel id="panel" header="Manejador de Usuarios" style="margin-left:10%; width:70%;" toggleable="true" toggleSpeed="500" closeSpeed="500" widgetVar="panel">  
 				<p:messages id="messages" autoUpdate="true" closable="true" /> 
 				 <p:panelGrid columns="2"  >  
 				 
@@ -32,13 +32,23 @@
 					
 					 <h:outputLabel for="txtpassword2" value="Confirmar Contraseña: *" />  
 					<p:password id="txtpassword2" value="#{usuarioBean.usuario.password}" label="Confirmacion de Contraseña" required="true"/>  
-					<!--<p:message for="txtpassword2" />	 -->									 
+					<!--<p:message for="txtpassword2" />	 -->	
+
+					<h:outputLabel for="lstRoles" value="Roles" />  
+				    <p:selectManyMenu id="lstRoles" value="#{usuarioBean.rolesSeleccionados}" >  
+						<f:selectItems value="#{usuarioBean.rolesLista}" var="rol" itemLabel="#{rol.nombre}" itemValue="#{rol.id}" >
+						
+						</f:selectItems >
+					</p:selectManyMenu> 					
 				 </p:panelGrid>  
 				 
-				  <!--<p:growl id="messages1" showDetail="true"/>-->
-				 <p:commandButton style="margin-top:1%;" id="saveBtn" ajax="true" value="Guardar" update="@form" actionListener="#{usuarioBean.GuardarUsuario}" 
-				 icon="ui-icon-disk" />
+				 <!--<p:panelGrid colums="2" style="float:right;">
 				
+				 </p:panelGrid>-->
+				 
+				  <!--<p:growl id="messages1" showDetail="true"/>-->
+				 <p:commandButton style="margin-top:1%;" id="saveBtn" ajax="true" value="Guardar" update="@form" action="#{usuarioBean.GuardarUsuario}" 
+				 icon="ui-icon-disk" />
 				
 				 
 				</p:panel>
@@ -46,7 +56,15 @@
 			<!--<p:separator id="separator"/>  -->
 			<br></br>
 			
-				<p:dataTable id="dtt" var="u" value="#{usuarioBean.usuariosSistema}" style="margin-left:10%;width:50%;text-align:center;"  paginator="true" rows="10" >  
+				<p:dataTable id="dtt" var="u" value="#{usuarioBean.usuariosSistema}" style="margin-left:10%;width:50%;text-align:center;"  paginator="true" rows="10"
+					rowKey="#{u.id}" selection="#{usuarioBean.usuarioSeleccionado}" selectionMode="single">  
+					
+					 <p:ajax event="rowSelect" listener="#{usuarioBean.onRowSelect}"   
+                    update="@form"  /> 
+					
+					<f:facet name="header">  
+						Listado de Usuarios del Sistema
+					</f:facet>
 					<p:column headerText="Nombre de Usuario">  
 						<h:outputText value="#{u.nombre}" />  
 					</p:column>  

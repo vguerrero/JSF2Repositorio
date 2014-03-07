@@ -25,7 +25,7 @@
 				</div>	-->	
 
 				<p:menubar>  
-					<p:submenu label="Account" icon="ui-icon-person">  
+					<p:submenu label="Account" icon="ui-icon-person" rendered="#{loginBean.usuarioisAdmin}">  
 						<!--<p:submenu label="New" icon="ui-icon-contact">  
 							<p:menuitem value="Project" url="#" />  
 							<p:menuitem value="Other" url="#" />  
@@ -64,7 +64,7 @@
 			  
 					<f:facet name="options">  
 						<!--<p:inputText style="margin-right:10px"/>  -->
-						<span>Usuario: <h:outputLabel value="#{loginBean.currentUserName}" style="margin-right:10px" /> </span>
+						<span>Usuario: <h:outputLabel value="#{loginBean.displayUserName}" style="margin-right:10px" /> </span>
 						<p:commandButton id="ajax" value="LogOut"  action="#{loginBean.logout}" style="margin-left:20px;" icon="ui-icon-extlink">  
 						</p:commandButton> 
 					</f:facet>  

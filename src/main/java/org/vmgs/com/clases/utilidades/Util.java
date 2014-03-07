@@ -4,6 +4,7 @@ import javax.faces.context.FacesContext;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import org.vmgs.com.clases.Usuario; 
+import javax.faces.context.ExternalContext;
  
 public class Util {
  
@@ -20,6 +21,12 @@ public class Util {
           getCurrentInstance().
           getExternalContext().getRequest();
       }
+	  
+	  public static ExternalContext getExternalContext (){
+		  return  FacesContext.
+			  getCurrentInstance().
+			  getExternalContext();
+	  }
  
       public static Usuario getUser()
       {

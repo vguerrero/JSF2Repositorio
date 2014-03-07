@@ -8,15 +8,13 @@
     </h:head>
 	
 	<h:body>
-        <h:form id="loginForm">          
+        <h:form >          
             <p:growl id="msg" showDetail="true" life="3000" />
             <p:panel header="Login" style="width: 360px;">
  
                 <h:panelGrid id="loginPanel" columns="1">
- 
-                    
- 
-                    <p:inputText id="username" value="#{loginBean.account.nombre}" pt:placeholder="Username" ></p:inputText>
+           
+                     <p:inputText id="username" value="#{loginBean.account.nombre}" pt:placeholder="Username" required="true" ></p:inputText>
  
                     <p:spacer></p:spacer>
  
@@ -24,7 +22,7 @@
  
                     
  
-                    <p:password id="password" value="#{loginBean.account.password}"  pt:placeholder="Password" feedback="false"></p:password>
+                    <p:password id="password" value="#{loginBean.account.password}"  pt:placeholder="Password" feedback="false" required="true"></p:password>
  
                     <p:spacer></p:spacer>
  
@@ -32,12 +30,17 @@
  
                     <p:spacer></p:spacer>
  
-                     <p:commandButton action="#{loginBean.loginProject}" value="Login" update="loginForm" ajax="true"></p:commandButton>
+                    
                 </h:panelGrid>
- 
+				<p:commandButton action="#{loginBean.loginProject}" value="Login" update="@form:msg" ajax="true"></p:commandButton>
             </p:panel>
- 
+			
+			
         </h:form>
- 
+		 <h:form>
+		  <p:commandLink id="nonAjax" actionListener="#{loginBean.test}" style="margin-right:20px;" ajax="false">  
+						<h:outputText value="Non-Ajax Submit" />  
+					</p:commandLink>  
+		 </h:form> 
     </h:body> 
 </html>

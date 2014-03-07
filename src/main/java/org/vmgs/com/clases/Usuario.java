@@ -11,9 +11,14 @@ import java.io.Serializable;
 import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
+import java.util.Set;
 import javax.persistence.OneToMany;
+import javax.persistence.ManyToMany;
 import javax.persistence.FetchType;
 import javax.persistence.NamedQuery;
+import javax.persistence.JoinTable;
+import javax.persistence.JoinColumn;
+import javax.persistence.CascadeType;
 
 @Entity
 @Table(name = "Usuario")
@@ -44,9 +49,20 @@ public class Usuario implements Serializable{
 	
 	@Column
 	private String usuarioedita;
-	
-	@OneToMany(fetch = FetchType.EAGER)
-	private List<Rol> roles;
+
+
+	// Hibernate @OneToMany Bug --> https://hibernate.atlassian.net/browse/HHH-3410
+	//debo convertirlo a @ManyToMany
+	/*@OneToMany(fetch = FetchType.LAZY,  mappedBy = "Usuario")
+	@JoinTable(
+            name="RolesxUsuario",
+            joinColumns = @JoinColumn( name="UsuarioId"),
+            inverseJoinColumns = @JoinColumn( name="RolId"))*/
+	@ManyToMany(fetch = FetchType.LAZY)
+	@JoinTable(name = "RolesxUsuario",  joinColumns = { 
+			@JoinColumn(name = "UsuarioId", nullable = false) }, 
+			inverseJoinColumns = { @JoinColumn(name = "RolId", nullable = false) })
+	private Set<Rol> roles;
 	
 	/* Propiedades */
 	public Long getId(){
@@ -99,5 +115,13 @@ public class Usuario implements Serializable{
 	
 	public void setUsuarioedita(String value){
 		this.usuarioedita = value;
+	}
+	
+	public Set<Rol> getRoles(){
+		return this.roles;
+	}
+	
+	public void setRoles(Set<Rol> roles){
+		this.roles= roles;
 	}
 }
