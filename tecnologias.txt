@@ -1,0 +1,17 @@
+JSF2, Jpa , hibernate, Spring, primefaces
+
+//faltantes por implementar
+log4j, querydsl ,ehcache, Testng, test de integracion, test de automatizacion, audit.
+
+
+//tutoriales necesarios 
+
+//comando para JRebel
+set MAVEN_OPTS=-javaagent:E:\rebel\jrebel\jrebel.jar %MAVEN_OPTS%
+
+//error: detached entity passed to persist 
+solucion: http://stackoverflow.com/questions/9821914/how-to-persist-manytomany-relation-duplicate-entry-or-detached-entity
+Pr mastering Jpa pag:183
+
+//integracion TestNG + spring
+http://java.dzone.com/articles/spring-testing-support-testng
