@@ -13,5 +13,10 @@ set MAVEN_OPTS=-javaagent:E:\rebel\jrebel\jrebel.jar %MAVEN_OPTS%
 solucion: http://stackoverflow.com/questions/9821914/how-to-persist-manytomany-relation-duplicate-entry-or-detached-entity
 Pr mastering Jpa pag:183
 
-//integracion TestNG + spring
+//integracion TestNG + spring --> los unit Test fueron implementados con JUnit
 http://java.dzone.com/articles/spring-testing-support-testng
+http://carinae.net/2009/12/testing-the-layered-arquitecture-with-spring-and-testng/
+
+JUNIT
+http://fuenteperez.es/blog/junit-manual-basico
+http://pfelitti87.blogspot.com/2013/05/restful-generic-crud-with-spring-3-jpa.html

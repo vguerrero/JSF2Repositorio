@@ -87,6 +87,8 @@ public class ServicioCredencialImpl implements ServicioCredencial {
 		return usuarioDao.getUsusarioById(id);
 	}
 	
+	/*Este metodo trae el usuario con su correspondiente Set de Roles
+	*/
 	public Usuario getUsuariowRoles(Long UsuarioId){
 		return usuarioDao.getUsuariowRoles(UsuarioId);
 	}

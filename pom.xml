@@ -201,11 +201,26 @@
 			<version>1.5</version>
 		</dependency>
 		
+		<!-- Base de datos en Memoria para unit Test -->
+		 <dependency>
+			<groupId>hsqldb</groupId>
+		   <artifactId>hsqldb</artifactId>
+		   <version>1.8.0.10</version>
+		  </dependency>
+		
 		<!--Test -->
-		<dependency>
+		<!--<dependency>
 			<groupId>org.testng</groupId>
 			<artifactId>testng</artifactId>
 			<version>6.8.8</version>
+			<scope>test</scope>
+		</dependency> -->
+		
+		
+		<dependency>
+			<groupId>junit</groupId>
+			<artifactId>junit</artifactId>
+			<version>4.11</version>
 			<scope>test</scope>
 		</dependency>
 		
