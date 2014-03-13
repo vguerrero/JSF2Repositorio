@@ -20,6 +20,9 @@ import java.util.ArrayList;
 import javax.faces.event.ActionEvent;
 import java.util.Arrays;
 import org.primefaces.event.SelectEvent;  
+import org.apache.log4j.Logger;
+
+
 
 @ManagedBean
 @Component("usuarioBean")
@@ -34,6 +37,7 @@ public class UsuarioBean {
 	private List<Rol> rolesLista;
 	private String[] rolesSeleccionados;
 	private Usuario usuarioSeleccionado;
+	private static final Logger logger = Logger.getLogger(UsuarioBean.class);
 	
 	//Init Method
 	@PostConstruct  
@@ -42,7 +46,7 @@ public class UsuarioBean {
 		usuario = new Usuario();
 		this.usuariosSistema = new ArrayList<Usuario>();
 		rolesLista = servicio.buscarTodosRoles();
-		
+
 	}  
 	
 	
@@ -129,21 +133,31 @@ public class UsuarioBean {
 		return "";		
 	}
 	
-	public void onRowSelect(SelectEvent event) {  
-		//System.out.println("Usuario:  " + usuarioSeleccionado.getId());
+	
+	
+	public void onRowSelect(SelectEvent event)  {  
 		if(usuarioSeleccionado != null && usuarioSeleccionado.getId() > 0){
+			logger.debug("Usuario seleccionado "+ usuarioSeleccionado.getId());
 			Long id = usuarioSeleccionado.getId();
 			this.usuario = servicio.getUsuariowRoles(id);
-			Set<Rol> roles = usuario.getRoles();//para poder obtenerlo debajo con el get(i) el set no tiene eso
-			
-			List<Rol> rolesl = new ArrayList(roles);
-			Integer rsize = rolesl.size();
-			if(rsize > 0){
-				rolesSeleccionados = new String[rolesl.size()];
-				for(int i = 0 ; i <= rsize-1 ;i++ ){
-					rolesSeleccionados[i] = rolesl.get(i).getId().toString();
+			if(usuario != null){
+				Set<Rol> roles = usuario.getRoles();//para poder obtenerlo debajo con el get(i) el set no tiene eso
+				if(roles != null){
+					List<Rol> rolesl = new ArrayList(roles);
+					Integer rsize = rolesl.size();
+					if(rsize > 0){
+						rolesSeleccionados = new String[rolesl.size()];
+						for(int i = 0 ; i <= rsize-1 ;i++ ){
+							rolesSeleccionados[i] = rolesl.get(i).getId().toString();
+						}
+					}
 				}
 			}
+			else{ 
+				FacesMessage msg = new FacesMessage( FacesMessage.SEVERITY_INFO,"Este usuario no tiene roles activos","Usuario Manager" );
+					FacesContext.getCurrentInstance().addMessage(null, msg);  
+			}
+			
 		}
 		
     }

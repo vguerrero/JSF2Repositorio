@@ -26,4 +26,6 @@ public interface  ServicioCredencial{
 	public Usuario getUsuarioxNombre(String nombre);
 	
 	public boolean UsuarioesAdminRol(String nombre);
+
+
 }

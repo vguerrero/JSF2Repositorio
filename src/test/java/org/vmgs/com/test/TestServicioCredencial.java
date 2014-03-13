@@ -84,5 +84,11 @@ public class TestServicioCredencial {
 		Assert.assertNotNull(user);
 		Assert.assertEquals("admin", user.getNombre());//admin debe ser el primer Usuario
 	}
+	
+	@Ignore //esta anotacion hace que se ignore y no se testee este metodo
+	@Test
+	public void ignorarTest(){
+		LOGGER.info("Este test sera ignorado");
+	}
 
 }

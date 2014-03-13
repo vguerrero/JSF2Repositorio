@@ -15,6 +15,7 @@ import java.util.List;
 import java.util.Set;
 import java.util.LinkedHashSet;
 
+
 @Service
 @Transactional
 public class ServicioCredencialImpl implements ServicioCredencial {
@@ -37,26 +38,24 @@ public class ServicioCredencialImpl implements ServicioCredencial {
 			return new Respuesta(true,"ok");
 		}
 		catch(UnsupportedOperationException e){
-			System.out.println("el servicio de guardar usuarios todavia no esta soportado");
 			return new Respuesta(false,e.getMessage());
 		}
 		catch(Exception ex){
-			System.out.println("el servicio de guardar usuarios presento un error"+ ex.getMessage());
 			return new Respuesta(false,ex.getMessage());
 		}
 		
 	}
 	
+		
 	public List<Usuario> buscarTodosUsuarios() throws UnsupportedOperationException {
 		try{
+			
 			return usuarioDao.buscarTodosUsuarios();//LinkedHashSet para que esten ordenados
 		}
 		catch(UnsupportedOperationException e){
-			System.out.println("el servicio de buscarTodosUsuarios todavia no esta soportado");
 			return null;
 		}
 		catch(Exception ex){
-			System.out.println("el servicio de buscarTodosUsuarios presento un error");
 			return null;
 		}
 	}
@@ -70,11 +69,9 @@ public class ServicioCredencialImpl implements ServicioCredencial {
 			return rolDao.buscarTodosRoles();
 		}
 		catch(UnsupportedOperationException e){
-			System.out.println("el servicio de buscarTodosRoles todavia no esta soportado");
 			return null;
 		}
 		catch(Exception ex){
-			System.out.println("el servicio de buscarTodosRoles presento un error");
 			return null;
 		}
 	}
