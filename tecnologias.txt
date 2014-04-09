@@ -9,6 +9,11 @@ log4j, querydsl ,ehcache,  audit.
 //comando para JRebel
 set MAVEN_OPTS=-javaagent:E:\rebel\jrebel\jrebel.jar %MAVEN_OPTS%
 
+//SPRING - LOADED - es equivalente a jREBEL es gratis y funciona bien.
+set MAVEN_OPTS=-javaagent:E:\spring-loaded\springloaded-1.1.5.RELEASE.jar -noverify
+fuentes: https://github.com/spring-projects/spring-loaded
+http://www.beabetterdeveloper.com/2013/08/good-bye-redeployment-spring-loaded.html
+
 //error: detached entity passed to persist 
 solucion: http://stackoverflow.com/questions/9821914/how-to-persist-manytomany-relation-duplicate-entry-or-detached-entity
 Pr mastering Jpa pag:183
