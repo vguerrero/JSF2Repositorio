@@ -43,6 +43,9 @@ public class TestServicioCredencial {
 		//System.out.println("Numero de Roles: " + RolList.size());
 		LOGGER.debug("Numero de Roles: " + RolList.size());
 		Assert.assertNotNull(RolList);
+		//el numero de roles debe ser 4
+		Assert.assertEquals(4, RolList.size());
+		
 		
 	}
 	
@@ -57,6 +60,7 @@ public class TestServicioCredencial {
 	public void getUsuarioxNombreTest(){
 		user = service.getUsuarioxNombre("admin");
 		Assert.assertNotNull(user);
+		Assert.assertEquals("admin", user.getNombre());
 	}
 	
 	@Test
@@ -83,6 +87,32 @@ public class TestServicioCredencial {
 		user = service.getUsuarioxId(1L);
 		Assert.assertNotNull(user);
 		Assert.assertEquals("admin", user.getNombre());//admin debe ser el primer Usuario
+	}
+	
+	//Que pueda obtener el Rol por medio del Id
+	@Test
+	public void obtenerRolxIdTest(){
+	   Rol rol = service.obtenerRolxId(3L);
+	   Assert.assertNotNull(rol);
+	   //el rol es de nombre 
+	   Assert.assertEquals("secretary", rol.getNombre());
+	   
+	}
+	
+	//Que pueda obtener el Usuario con sus roles
+	@Test
+	public void getUsuariowRolesTest(){
+		user = service.getUsuariowRoles(4L);
+		//el usuario con id = 4 es secretataria
+		Assert.assertEquals("secretaria", user.getNombre());
+		//ahora comprobamos que traiga los roles correspondientes
+		List<Rol> RolList = new ArrayList(user.getRoles());
+		Assert.assertNotNull(RolList);
+		//ahora comprobamos que sean los roles user y secretary
+		for(Rol r : RolList ){
+			boolean resp = ("user".equals(r.getNombre()) || "secretary".equals(r.getNombre()));
+			 Assert.assertTrue(resp);
+		}
 	}
 	
 	@Ignore //esta anotacion hace que se ignore y no se testee este metodo

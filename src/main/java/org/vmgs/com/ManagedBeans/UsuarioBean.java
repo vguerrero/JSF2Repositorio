@@ -21,6 +21,7 @@ import javax.faces.event.ActionEvent;
 import java.util.Arrays;
 import org.primefaces.event.SelectEvent;  
 import org.apache.log4j.Logger;
+import java.util.Date;
 
 
 
@@ -42,7 +43,8 @@ public class UsuarioBean {
 	//Init Method
 	@PostConstruct  
 	public void init() {  
-		System.out.println("Init Method \n");
+		//System.out.println("Init Method \n");
+		logger.debug("\n Inicializando el Bean de Usuario: " + new Date() + " \n");
 		usuario = new Usuario();
 		this.usuariosSistema = new ArrayList<Usuario>();
 		rolesLista = servicio.buscarTodosRoles();
@@ -137,7 +139,7 @@ public class UsuarioBean {
 	
 	public void onRowSelect(SelectEvent event)  {  
 		if(usuarioSeleccionado != null && usuarioSeleccionado.getId() > 0){
-			logger.debug("Usuario seleccionado "+ usuarioSeleccionado.getId());
+			logger.debug("\n Usuario seleccionado "+ usuarioSeleccionado.getId()+ "\n");		
 			Long id = usuarioSeleccionado.getId();
 			this.usuario = servicio.getUsuariowRoles(id);
 			if(usuario != null){

@@ -1,7 +1,7 @@
-JSF2, Jpa , hibernate, Spring, primefaces, Test
+JSF2, Jpa , hibernate, Spring, primefaces, Test, 
 
 //faltantes por implementar
-log4j, querydsl ,ehcache,  audit.
+log4j, querydsl ,ehcache,  audit, reportes(jasper)
 
 
 //tutoriales necesarios 
@@ -32,3 +32,7 @@ http://danielveselka.blogspot.com/2010/12/log4j-wrapper.html --> no me funciono
 
 implementar un Aspect con --> aspectj --> http://docs.spring.io/spring/docs/3.0.0.M4/reference/html/ch07s08.html
 http://www.mkyong.com/spring3/spring-aop-aspectj-annotation-example/ --> para que cada vez que haya una excepcion se logee el error
+
+EHCACHE
+http://www.informit.com/guides/content.aspx?g=java&seqNum=650
+http://www.xnoccio.com/es/437-implementando-una-cache-sencilla-de-objetos-con-ehcache/
