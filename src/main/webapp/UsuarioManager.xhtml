@@ -13,7 +13,7 @@
 	
 	<ui:composition template="/WEB-INF/template/common/commonLayout.xhtml">
 		<ui:define name="content">
-		<h:form id="formu">
+		<h:form id="formu" enctype="multipart/form-data">
 		
 			<p:panel id="panel" header="Manejador de Usuarios" style="margin-left:10%; width:70%;" toggleable="true" toggleSpeed="500" closeSpeed="500" widgetVar="panel">  
 				<p:messages id="messages" autoUpdate="true" closable="true" /> 
@@ -33,7 +33,18 @@
 					 <h:outputLabel for="txtpassword2" value="Confirmar Contraseña: *" />  
 					<p:password id="txtpassword2" value="#{usuarioBean.usuario.password}" label="Confirmacion de Contraseña" required="true"/>  
 					<!--<p:message for="txtpassword2" />	 -->	
-
+					
+					
+					<h:outputLabel for="fupload" value="seleccione la foto:" />  
+					<p:fileUpload id="fupload" value="#{usuarioBean.file}" mode="simple"/>  
+					 
+					<h:outputLabel  value="" />  
+					<p:graphicImage value="#{usuarioBean.dbImage}" height="120px" width="120px">
+						
+					</p:graphicImage>							
+					
+					<!--<p:growl id="fileUploadMessage" showDetail="true"/>   -->
+  	
 					<h:outputLabel for="lstRoles" value="Roles" />  
 				    <p:selectManyMenu id="lstRoles" value="#{usuarioBean.rolesSeleccionados}" >  
 						<f:selectItems value="#{usuarioBean.rolesLista}" var="rol" itemLabel="#{rol.nombre}" itemValue="#{rol.id}" >
@@ -47,7 +58,7 @@
 				 </p:panelGrid>-->
 				 
 				  <!--<p:growl id="messages1" showDetail="true"/>-->
-				 <p:commandButton style="margin-top:1%;" id="saveBtn" ajax="true" value="Guardar" update="@form" action="#{usuarioBean.GuardarUsuario}" 
+				 <p:commandButton style="margin-top:1%;" id="saveBtn" ajax="false" value="Guardar" update="@form" action="#{usuarioBean.GuardarUsuario}" 
 				 icon="ui-icon-disk" />
 				
 				 

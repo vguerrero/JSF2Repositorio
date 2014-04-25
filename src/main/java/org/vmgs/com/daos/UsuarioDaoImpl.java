@@ -24,6 +24,7 @@ public class UsuarioDaoImpl implements UsuarioDao{
 	public Usuario save(Usuario u) throws UnsupportedOperationException{
 		em.persist(u);
 		return u;
+		
 	}
 	
 	public void update (Usuario u)throws UnsupportedOperationException{

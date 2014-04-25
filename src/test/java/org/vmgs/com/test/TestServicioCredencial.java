@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.vmgs.com.servicios.ServicioCredencial;
 import org.vmgs.com.clases.*;
+import org.vmgs.com.clases.utilidades.*;
 import java.util.List;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,6 +15,9 @@ import org.apache.log4j.Logger;
 import org.apache.log4j.PropertyConfigurator;
 import java.util.List;
 import java.util.ArrayList;
+import java.util.Date;
+import java.io.FileOutputStream;
+
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations = { "classpath:/spring-beans-test.xml", "classpath:/applicationContext-servlet-test.xml" })
@@ -50,6 +54,7 @@ public class TestServicioCredencial {
 	}
 	
 	/*Que el servicio sea capaz de traer una lista todos  los usuarios del sistema*/
+	@Ignore
 	@Test	
 	public void buscarTodosUsuariosTest(){
 		Assert.assertEquals(4, service.buscarTodosUsuarios().size());
@@ -115,10 +120,39 @@ public class TestServicioCredencial {
 		}
 	}
 	
+	//se puede probar con este test leer la imagen y guardarla atravez de jpa
+	@Test
+	public void saveUsuarioImagenTest(){
+		String fileLocation= "C:\\Users\\vguerrero\\Desktop\\hermosura.jpg";
+		byte[] bites = Util.convertFileToByteArray(fileLocation);
+		System.out.println("Array de bytes: " + bites);
+		user = new Usuario();
+		user.setNombre("capristino");
+		user.setPassword("test");
+		user.setImage(bites);
+		Respuesta resultado = service.GuardarUsuario(user);
+		Assert.assertTrue(resultado.getRespuesta());//si guardo correctamente
+		System.out.println("Se guardo el usuario con el id: " + user.getId());
+		Assert.assertTrue(user.getId() > 0);
+		Usuario testU = service.getUsuarioxId(user.getId());
+		Assert.assertEquals(user.getNombre(), testU.getNombre());
+		Assert.assertNotNull(testU.getImage());
+		//escribimos la imagen en disco para saber si sirve
+		 try{
+			FileOutputStream fos = new FileOutputStream("E:\\testImage.jpg"); 
+			fos.write(testU.getImage());
+			fos.close();
+		 }catch(Exception e){
+            e.printStackTrace();
+		 }
+	}
+	
 	@Ignore //esta anotacion hace que se ignore y no se testee este metodo
 	@Test
 	public void ignorarTest(){
 		LOGGER.info("Este test sera ignorado");
 	}
+	
+	
 
 }

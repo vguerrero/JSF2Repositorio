@@ -33,17 +33,23 @@ public class ServicioCredencialImpl implements ServicioCredencial {
 			
 			user.setPassword(Cifrado.Encriptar(user.getPassword()));//Cifrado.Encriptar(user.getPassword()));
 			user.setFechacrea(new Date());
-			user.setUsuariocrea(Util.getCurrentUserName());
+			System.out.println("image: " + user.getImage());
+			user.setUsuariocrea("admin");//Util.getCurrentUserName
+			
 			usuarioDao.save(user);
+			
 			return new Respuesta(true,"ok");
 		}
 		catch(UnsupportedOperationException e){
+			System.out.println("exception 1...");
 			return new Respuesta(false,e.getMessage());
 		}
 		catch(Exception ex){
+			
+			ex.printStackTrace();
 			return new Respuesta(false,ex.getMessage());
 		}
-		
+		//System.out.println("llego hasta aqui");
 	}
 	
 		

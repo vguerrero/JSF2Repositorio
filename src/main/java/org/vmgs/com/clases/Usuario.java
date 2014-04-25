@@ -19,6 +19,9 @@ import javax.persistence.NamedQuery;
 import javax.persistence.JoinTable;
 import javax.persistence.JoinColumn;
 import javax.persistence.CascadeType;
+import javax.persistence.Lob;
+import javax.persistence.Basic;
+
 
 @Entity
 @Table(name = "Usuario")
@@ -37,6 +40,12 @@ public class Usuario implements Serializable{
 	
 	@Column (nullable=false)
 	private String password;
+	
+	@Lob
+	@Column(name="usuarioImagen", nullable=true)
+	@Basic(fetch=FetchType.LAZY) 
+	private byte[] image;
+
 	
 	@Column(nullable=false)
 	private Date fechacrea;
@@ -123,5 +132,13 @@ public class Usuario implements Serializable{
 	
 	public void setRoles(Set<Rol> roles){
 		this.roles= roles;
+	}
+	
+	public byte[] getImage(){
+		return this.image;
+	}
+	
+	public void setImage(byte[] value){
+		this.image= value;
 	}
 }

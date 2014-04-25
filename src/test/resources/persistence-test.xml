@@ -10,13 +10,15 @@
 		<class>org.vmgs.com.clases.Persona</class>
 		<class>org.vmgs.com.clases.Rol</class>
 		<class>org.vmgs.com.clases.Usuario</class>
+		<class>org.vmgs.com.clases.Producto</class>
+		<class>org.vmgs.com.clases.UnidadMedida</class>
 		
 		<properties>
 		    <property name="hibernate.show_sql" value="true" />
 		    <property name="hibernate.format_sql" value="true"/>
 			<property name="hibernate.dialect" value="org.hibernate.dialect.HSQLDialect" />
 			<property name="hibernate.hbm2ddl.auto" value="create" />
-			<property name="hibernate.show_sql" value="true" />
+			<property name="hibernate.show_sql" value="false" />
 			<property name="hibernate.hbm2ddl.import_files" value="/initial_data.sql" />
 			
 		</properties>

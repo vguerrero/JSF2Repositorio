@@ -22,6 +22,12 @@ Pr mastering Jpa pag:183
 http://java.dzone.com/articles/spring-testing-support-testng
 http://carinae.net/2009/12/testing-the-layered-arquitecture-with-spring-and-testng/
 
+ejecutar un unit test en particular
+mvn -Dtest=Nombredelaclase#Nombredeltestcase test
+
+GENERIC DAO PATTERN
+http://www.codeproject.com/Articles/251166/The-Generic-DAO-pattern-in-Java-with-Spring-and
+
 JUNIT
 http://fuenteperez.es/blog/junit-manual-basico
 http://junit.sourceforge.net/javadoc/org/junit/Assert.html
@@ -36,3 +42,6 @@ http://www.mkyong.com/spring3/spring-aop-aspectj-annotation-example/ --> para qu
 EHCACHE
 http://www.informit.com/guides/content.aspx?g=java&seqNum=650
 http://www.xnoccio.com/es/437-implementando-una-cache-sencilla-de-objetos-con-ehcache/
+
+J2EE document Oracle
+http://docs.oracle.com/javaee/5/tutorial/doc/
